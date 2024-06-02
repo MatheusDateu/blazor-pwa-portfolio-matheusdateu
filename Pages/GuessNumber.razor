@@ -1,0 +1,95 @@
+@page "/guess-number"
+@using System.Timers
+@inject IJSRuntime JSRuntime
+
+<style>
+    .centered-container {
+        height: 100vh;
+    }
+</style>
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="text-center">
+        <h3>Jogo de Adivinhação de Números</h3>
+
+        <p class="text-primary">O número escolhido é entre 1 e 100</p>
+        
+        <div>
+            <input @bind="userGuess" type="number" class="form-control mb-2" placeholder="Digite seu palpite" />
+            <button class="btn btn-primary w-100" @onclick="MakeGuess">ENVIAR PALPITE</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    private int chosenNumber;
+    private int attempts;
+    private const int maxAttempts = 3;
+    private int userGuess;
+    private string message = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        StartNewGame();
+    }
+
+    private void StartNewGame()
+    {
+        var random = new Random();
+        chosenNumber = random.Next(1, 101); // Número aleatório entre 1 e 100
+        attempts = 0;
+        message = "Tente adivinhar o número entre 1 e 100!";
+    }
+
+    private async void MakeGuess()
+    {
+        if (attempts >= maxAttempts)
+        {
+            message = $"Você já usou todas as suas {maxAttempts} tentativas. O número era {chosenNumber}.";
+            await ShowAlert(message);
+            return;
+        }
+
+        attempts++;
+
+        if (userGuess == chosenNumber)
+        {
+            message = "Parabéns! Você acertou o número!";
+            await ShowAlert(message);
+            StartNewGame();
+        }
+        else if (userGuess < chosenNumber)
+        {
+            message = "O número escolhido é maior.";
+            await ShowAlert(message);
+        }
+        else
+        {
+            message = "O número escolhido é menor.";
+            await ShowAlert(message);
+        }
+
+        if (attempts >= maxAttempts)
+        {
+            message += $" Você usou todas as suas tentativas. O número era {chosenNumber}.";
+            await ShowAlert(message);
+            // Você pode iniciar um novo jogo automaticamente após 3 segundos
+            var timer = new Timer(3000);
+            timer.Elapsed += (sender, e) =>
+            {
+                InvokeAsync(() =>
+                {
+                    StartNewGame();
+                    StateHasChanged();
+                });
+                timer.Stop();
+            };
+            timer.Start();
+        }
+    }
+
+    private async Task ShowAlert(string message)
+    {
+        await JSRuntime.InvokeVoidAsync("alert", message);
+    }
+}
