@@ -1,0 +1,29 @@
+﻿@code {
+    private bool isHovered;
+
+    private void OnMouseEnter()
+    {
+        isHovered = true;
+    }
+
+    private void OnMouseLeave()
+    {
+        isHovered = false;
+    }
+}
+
+<a href="@Href" target="_blank" class="social-link" @onmouseover="OnMouseEnter" @onmouseout="OnMouseLeave">
+    @if (isHovered)
+    {
+        <span class="social-text">
+            @Text
+        </span>
+    }
+    <i class="@Icon" style="transform:@(isHovered ? "translateX(-110px)" : "translateX(0)"); filter:@(isHovered ? "brightness(1.2)" : "brightness(1)");"></i>
+</a>
+
+@code {
+    [Parameter] public string Href { get; set; }
+    [Parameter] public string Icon { get; set; }
+    [Parameter] public string Text { get; set; }
+}
