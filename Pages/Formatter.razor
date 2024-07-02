@@ -1,0 +1,54 @@
+﻿@page "/formatter"
+
+@inject IJSRuntime JS
+
+<PageTitle>Formata Dados</PageTitle>
+
+<div class="d-flex justify-content-center align-items-center heght-certer">
+    <div class="text-center">
+        <h1 class="fw-bolder">FORMATE O NÚMERO DO PROCESSO</h1>
+
+        <div class="mb-3">
+            <input type="text" class="form-control" @bind="processNumber" placeholder="Digite o número do processo" />
+        </div>
+
+        <div class="mb-3">
+            <input type="text" class="form-control" value="@formattedProcessNumber" readonly placeholder="Número de processo formatado" />
+        </div>
+
+        <div class="d-grid gap-2">
+            <button class="btn btn-success w-100" @onclick="CopyToClipboard">COPIAR</button>
+            <button class="btn btn-secondary w-100" @onclick="ClearFields">LIMPAR</button>
+        </div>
+
+        <div class="mt-3">
+            <span class="text-success" style="display:@(isCopied ? "block" : "none")">Número copiado para a área de transferência! 🗂️</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .heght-certer {
+        height: 92vh;
+    }
+</style>
+
+@code {
+    private string processNumber = string.Empty;
+    private string formattedProcessNumber = string.Empty;
+    private bool isCopied = false;
+
+    private void CopyToClipboard()
+    {
+        formattedProcessNumber = processNumber.Replace("-", string.Empty).Replace(".", string.Empty).Trim();
+        JS.InvokeVoidAsync("navigator.clipboard.writeText", formattedProcessNumber);
+        isCopied = true;
+    }
+
+    private void ClearFields()
+    {
+        processNumber = string.Empty;
+        formattedProcessNumber = string.Empty;
+        isCopied = false;
+    }
+}

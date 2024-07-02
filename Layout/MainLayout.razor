@@ -8,10 +8,10 @@
     <main>
         <div class="top-row px-4 bg-black">
             <div class="social-links">
-                <SocialLink Href="https://github.com/MatheusDateu" Icon="fab fa-github" Text="Confira meu Perfil no GitHub" />
-                <SocialLink Href="https://www.linkedin.com/in/matheus-delmondes-7260b6221/" Icon="fab fa-linkedin" Text="Confira meu Perfil no LinkedIn" />
-                <SocialLink Href="mailto:mdelmondes5@gmail.com" Icon="fas fa-envelope" Text="Confira meu Email" />
-                <SocialLink Href="https://www.instagram.com/dev_matheusdelmondes/" Icon="fab fa-instagram" Text="Confira meu Perfil no Instagram" />
+                <SocialLink Href="https://github.com/MatheusDateu" Icon="fab fa-github" />
+                <SocialLink Href="https://www.linkedin.com/in/matheus-delmondes-7260b6221/" Icon="fab fa-linkedin" />
+                <SocialLink Href="mailto:mdelmondes5@gmail.com" Icon="fas fa-envelope" />
+                <SocialLink Href="https://www.instagram.com/dev_matheusdelmondes/" Icon="fab fa-instagram" />
             </div>
         </div>
 
@@ -32,41 +32,33 @@
 
     .social-links {
         display: flex;
-        gap: 10px;
+        gap: 5px;
     }
 
     .social-link {
-        position: relative;
         display: flex;
         align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
         text-decoration: none;
         color: white;
-        transition: color 0.3s ease;
-    }
-
-    .social-text {
-        position: absolute;
-        right: 100%; /* Posiciona o texto à esquerda do ícone */
-        margin-right: 10px; /* Espaço entre o texto e o ícone */
-        white-space: nowrap;
-        opacity: 0;
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        color: #fff;
-    }
-
-    .social-link:hover .social-text {
-        opacity: 1;
-        transform: translateX(0);
+        transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .social-link i {
-        font-size: 30px;
-        border-radius: 50%;
-        transition: transform 0.3s ease, filter 0.3s ease;
+        font-size: 25px;
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .social-link:hover {
+        color: #f1f1f1;
+        transform: scale(1.1);
+        box-shadow: 0px 5px 15px rgba(0, 55, 110, 1);
     }
 
     .social-link:hover i {
-        transform: translateX(-110px); /* Empurra o ícone para a direita o suficiente para mostrar o texto */
-        filter: brightness(1.2);
+        color: lightgray; /* Escolha uma cor que combine */
+        transform: scale(1.1);
     }
 </style>

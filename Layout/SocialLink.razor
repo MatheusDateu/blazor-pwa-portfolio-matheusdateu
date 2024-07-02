@@ -1,29 +1,23 @@
-﻿@code {
-    private bool isHovered;
-
-    private void OnMouseEnter()
-    {
-        isHovered = true;
-    }
-
-    private void OnMouseLeave()
-    {
-        isHovered = false;
-    }
-}
-
-<a href="@Href" target="_blank" class="social-link" @onmouseover="OnMouseEnter" @onmouseout="OnMouseLeave">
-    @if (isHovered)
-    {
-        <span class="social-text">
-            @Text
-        </span>
-    }
-    <i class="@Icon" style="transform:@(isHovered ? "translateX(-110px)" : "translateX(0)"); filter:@(isHovered ? "brightness(1.2)" : "brightness(1)");"></i>
+﻿<a href="@Href" target="_blank" class="social-link">
+    <i class="@Icon" title="@Title"></i>
 </a>
 
 @code {
     [Parameter] public string Href { get; set; }
     [Parameter] public string Icon { get; set; }
-    [Parameter] public string Text { get; set; }
+    private string Title { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Console.Out.Write(Icon);
+        SetTitle();
+    }
+
+    private void SetTitle()
+    {
+        Title = Icon.Substring(7);
+        Title = Title.Substring(0, 1).ToUpper() + Title.Substring(1);
+        if (Title.Equals("Envelope"))
+            Title = "Email";
+    }
 }
