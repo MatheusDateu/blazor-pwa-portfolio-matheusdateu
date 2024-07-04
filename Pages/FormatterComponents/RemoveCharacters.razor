@@ -1,0 +1,108 @@
+﻿@using System.ComponentModel.DataAnnotations
+@inherits ComponentBase
+@inject IJSRuntime JS
+
+<div class="@classes" id="@id" role="@role" aria-labelledby="@ariaLabelledBy">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="text-center">
+            <h1 class="fw-bolder">REMOVA CARACTERES INDESEJADOS</h1>
+            <div class="mb-3">
+                <select @onchange="ChangeTypeOfData" class="custom-select" aria-label="tipo-de-dado">
+                    @foreach (TipoDeDado tipo in Enum.GetValues(typeof(TipoDeDado)))
+                    {
+                        <option class="custom-option" value="@tipo">@tipo.ToString().Replace("_", " ")</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" @bind="_processNumber" placeholder="Digite o número do processo" />
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" value="@_formattedProcessNumber" readonly placeholder="Número de processo formatado" />
+            </div>
+            <div class="d-grid gap-2">
+                <button class="btn btn-success w-100" @onclick="CopyToClipboard">COPIAR</button>
+                <button class="btn btn-secondary w-100" @onclick="ClearFields">LIMPAR</button>
+            </div>
+            <div class="mt-3">
+                <span class="text-success" style="display:@(_isCopied ? "block" : "none")">Número copiado para a área de transferência! 🗂️</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .custom-select {
+        width: 100%;
+        background-color: var(--bs-secondary);
+        color: #fff;
+        border: 1px solid var(--bs-success);
+        padding: 6px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+        .custom-select:hover, .custom-select:focus {
+            background-color: var(--bs-success);
+            color: #fff;
+        }
+
+    .custom-option {
+        padding: 2px;
+    }
+</style>
+
+@code {
+    #region Properties
+    private string _processNumber = string.Empty;
+    private string _formattedProcessNumber = string.Empty;
+    private bool _isCopied = false;
+    private TipoDeDado _tipoDeDado = TipoDeDado.PROCESSO_ELETRONICO;
+    #endregion
+
+    #region Parameters
+    [Parameter] public string? classes { get; set; }
+    [Parameter][Required] public string id { get; set; }
+    [Parameter] public string role { get; set; } = "tabpanel";
+    [Parameter][Required] public string ariaLabelledBy { get; set; }
+    #endregion
+
+    private async Task CopyToClipboard()
+    {
+        _formattedProcessNumber = _tipoDeDado switch
+        {
+            TipoDeDado.PROCESSO_ELETRONICO or TipoDeDado.CPF => _processNumber.Replace("-", "").Replace(".", "").Trim(),
+            TipoDeDado.CNPJ => _processNumber.Replace("-", "").Replace(".", "").Replace("/", "").Trim(),
+            TipoDeDado.CEP => _processNumber.Replace("-", "").Trim(),
+            TipoDeDado.TELEFONE => _processNumber.Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "").Replace("+", "").Trim(),
+            _ => _formattedProcessNumber
+        };
+
+        await JS.InvokeVoidAsync("navigator.clipboard.writeText", _formattedProcessNumber);
+        _isCopied = true;
+    }
+
+    private void ClearFields()
+    {
+        _processNumber = string.Empty;
+        _formattedProcessNumber = string.Empty;
+        _isCopied = false;
+    }
+
+    private void ChangeTypeOfData(ChangeEventArgs e)
+    {
+        if (Enum.TryParse(e.Value?.ToString(), out TipoDeDado result))
+        {
+            _tipoDeDado = result;
+        }
+    }
+
+    private enum TipoDeDado
+    {
+        PROCESSO_ELETRONICO,
+        CPF,
+        CNPJ,
+        CEP,
+        TELEFONE
+    }
+}

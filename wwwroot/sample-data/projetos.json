@@ -10,12 +10,12 @@
   },
   {
     "Id": 2,
-    "Nome": "AUTOMAJUS: Projeto vencedor do INOVAJURR 2023",
-    "Resumo": "Resumo do projeto B. Este é outro exemplo de um resumo longo para testar a funcionalidade.",
+    "Nome": "AUTOMAJUS: Ampliação da Automação no Poder Judiciário de Roraima",
+    "Resumo": "🏆 É com muito orgulho que digo que este projeto venceu o INOVAJURR 2023 - Competição de Ideias Estruturadas e Projetos de Inovação do Tribunal de Justiça de Roraima, não só em uma categoria, mas sim nas duas em que estava inscrito: Competição de Ideias Estruturadas e Competição de Ideias Estruturadas e Projetos de Inovação.",
     "ThumbnailUrl": "../assets/images/trofeu_inovajurr.jpg",
-    "Descricao": "Descrição detalhada do Projeto B",
+    "Descricao": "",
     "ImagemUrl": "../assets/images/projeto_automajus_detalhe.jpg",
-    "VideoUrl": "https://www.youtube.com/embed/P0IjIJKtzoY?si=HoYWWctIkWfeltui"
+    "VideoUrl": ""
   },
   {
     "Id": 3,
@@ -24,6 +24,6 @@
     "ThumbnailUrl": "../assets/images/trofeu_inovajurr.jpg",
     "Descricao": "Descrição detalhada do Projeto B",
     "ImagemUrl": "../assets/images/projeto_automajus_detalhe.jpg",
-    "VideoUrl": "https://www.youtube.com/embed/P0IjIJKtzoY?si=HoYWWctIkWfeltui"
+    "VideoUrl": ""
   }
 ]
