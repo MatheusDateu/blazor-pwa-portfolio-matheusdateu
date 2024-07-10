@@ -4,7 +4,6 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/MatheusDateu/blazor-pwa-portfolio-matheusdateu?style=for-the-badge&color=red)
 ![GitHub last commit](https://img.shields.io/github/last-commit/MatheusDateu/blazor-pwa-portfolio-matheusdateu?style=for-the-badge&color=orange)
 ![GitHub language count](https://img.shields.io/github/languages/count/MatheusDateu/blazor-pwa-portfolio-matheusdateu?style=for-the-badge&color=red)
-![GitHub top language](https://img.shields.io/github/languages/top/MatheusDateu/blazor-pwa-portfolio-matheusdateu?style=for-the-badge&color=orange)
 
 ## 📜 Description
 
