@@ -3,27 +3,51 @@
     "Id": 1,
     "Nome": "CCN: Sistema de Cadastro de Casos de Negócios",
     "Resumo": "Sistema que auxilia o Analista de Negócios do setor de RPA do TJRR a obter e cadastrar os dados necessários para criar, atualizar e consultar Casos de Negócios",
-    "ThumbnailUrl": "../assets/images/projeto_ccn_index.jpeg",
-    "Descricao": "Problema Solucionado: As métricas não eram contabilizadas de maneira tradicional devido às movimentações registradas no Sistema Judicial do Poder Judiciário de Roraima.\n\nPropósito do Sistema: O objetivo do sistema é auxiliar no cadastro de casos de negócios. Esses casos são definidos pelos parâmetros considerados adequados pelo setor de Automação do Tribunal de Justiça de Roraima, permitindo a quantificação de atividades automatizadas.\n\nContextualização: Durante as reuniões periódicas de apresentação dos resultados do projeto de automação no Poder Judiciário de Roraima, iniciado em 2023, enfrentávamos dificuldades para demonstrar o real benefício da automação por meio de números. Isso ocorria porque apenas as atividades que geravam movimentações em processos judiciais eram contabilizadas pelo sistema de métricas e estatísticas do Tribunal de Justiça.\n\nDiante dessa limitação, percebemos a necessidade de abordar as contribuições reais das automações implantadas. Realizamos uma extensa reunião com autoridades dos setores de TI, Automação e Estatísticas. A partir dessa reunião, surgiu a ideia de que as automações deveriam registrar suas atividades considerando os “Casos de Negócio”. Esses casos representam conjuntos de características que tornam cada atividade única, mas também compartilham semelhanças com outras atividades. Por exemplo, uma alteração de número de telefone possui aspectos semelhantes à atividade de alteração de endereço, como cliques, tempo economizado e gatilhos (eventos que originam a necessidade da tarefa).\n\nDessa forma, atribuiu-se ao Analista de Negócios o registro dessas atividades. Desenvolvemos este sistema para auxiliar o Analista de Negócios a realizar o cadastro de Eventos, Atividades e, consequentemente, dos Casos de Negócio.",
-    "ImagemUrl": "../assets/images/projeto_ccn_index.jpeg",
-    "VideoUrl": "https://www.youtube.com/embed/P0IjIJKtzoY?si=HoYWWctIkWfeltui"
+    "ThumbnailUrl": "https://drive.google.com/uc?export=view&id=1MobDxqNSrS_TU4_yl6c-kxgiCLj1237F",
+    "Descricao": "<strong>Problema Solucionado:</strong> As métricas não eram contabilizadas de maneira tradicional devido às movimentações registradas no Sistema Judicial do Poder Judiciário de Roraima.<br><br><strong>Propósito do Sistema:</strong> O objetivo do sistema é auxiliar no cadastro de casos de negócios. Esses casos são definidos pelos parâmetros considerados adequados pelo setor de Automação do Tribunal de Justiça de Roraima, permitindo a quantificação de atividades automatizadas.<br><br><strong>Contextualização:</strong> Durante as reuniões periódicas de apresentação dos resultados do projeto de automação no Poder Judiciário de Roraima, iniciado em 2023, enfrentávamos dificuldades para demonstrar o real benefício da automação por meio de números. Isso ocorria porque apenas as atividades que geravam movimentações em processos judiciais eram contabilizadas pelo sistema de métricas e estatísticas do Tribunal de Justiça.<br><br>Diante dessa limitação, percebemos a necessidade de abordar as contribuições reais das automações implantadas. Realizamos uma extensa reunião com autoridades dos setores de TI, Automação e Estatísticas. A partir dessa reunião, surgiu a ideia de que as automações deveriam registrar suas atividades considerando os “Casos de Negócio”. Esses casos representam conjuntos de características que tornam cada atividade única, mas também compartilham semelhanças com outras atividades. Por exemplo, uma alteração de número de telefone possui aspectos semelhantes à atividade de alteração de endereço, como cliques, tempo economizado e gatilhos (eventos que originam a necessidade da tarefa).<br><br>Dessa forma, atribuiu-se ao Analista de Negócios o registro dessas atividades. Desenvolvemos este sistema para auxiliar o Analista de Negócios a realizar o cadastro de Eventos, Atividades e, consequentemente, dos Casos de Negócio.",
+    "ImagemUrl": "https://drive.google.com/uc?export=view&id=1MobDxqNSrS_TU4_yl6c-kxgiCLj1237F",
+    "VideoUrl": "https://www.youtube.com/embed/L8hwj-HuUEc?si=_rSXMS_9Podtck9U",
+    "Images": [
+      "https://via.placeholder.com/800x600?text=CCN+Image+1",
+      "https://via.placeholder.com/800x600?text=CCN+Image+2",
+      "https://via.placeholder.com/800x600?text=CCN+Image+3",
+      "https://via.placeholder.com/800x600?text=CCN+Image+4",
+      "https://via.placeholder.com/800x600?text=CCN+Image+5",
+      "https://via.placeholder.com/800x600?text=CCN+Image+6"
+    ]
   },
   {
     "Id": 2,
     "Nome": "AUTOMAJUS: Ampliação da Automação no Poder Judiciário de Roraima",
     "Resumo": "🏆 É com muito orgulho que digo que este projeto venceu o INOVAJURR 2023 - Competição de Ideias Estruturadas e Projetos de Inovação do Tribunal de Justiça de Roraima, não só em uma categoria, mas sim nas duas em que estava inscrito: Competição de Ideias Estruturadas e Competição de Ideias Estruturadas e Projetos de Inovação.",
-    "ThumbnailUrl": "../assets/images/trofeu_inovajurr.jpg",
-    "Descricao": "",
-    "ImagemUrl": "../assets/images/projeto_automajus_detalhe.jpg",
-    "VideoUrl": ""
+    "ThumbnailUrl": "https://via.placeholder.com/150?text=Thumbnail+AUTOMAJUS",
+    "Descricao": "<strong>Problema Solucionado:</strong> O processo judicial no Tribunal de Justiça de Roraima era lento e ineficiente devido à falta de automação.<br><br><strong>Propósito do Sistema:</strong> O projeto AUTOMAJUS visa implementar soluções de automação para acelerar e melhorar a eficiência dos processos judiciais.<br><br><strong>Contextualização:</strong> Em 2023, o Tribunal de Justiça de Roraima lançou uma iniciativa para modernizar suas operações, ganhando reconhecimento nacional pela inovação no setor judiciário.",
+    "ImagemUrl": "https://via.placeholder.com/800x600?text=Imagem+AUTOMAJUS",
+    "VideoUrl": "https://www.youtube.com/embed/L8hwj-HuUEc?si=_rSXMS_9Podtck9U",
+    "Images": [
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+1",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+2",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+3",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+4",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+5",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+6"
+    ]
   },
   {
     "Id": 3,
     "Nome": "Bot Mestre VCV: Automação Central da 'Vara de Crimes Contra Vulneráveis'",
-    "Resumo": "Resumo do projeto B. Este é outro exemplo de um resumo longo para testar a funcionalidade.",
-    "ThumbnailUrl": "../assets/images/trofeu_inovajurr.jpg",
-    "Descricao": "Descrição detalhada do Projeto B",
-    "ImagemUrl": "../assets/images/projeto_automajus_detalhe.jpg",
-    "VideoUrl": ""
+    "Resumo": "Sistema de automação para auxiliar na gestão e acompanhamento de casos na Vara de Crimes Contra Vulneráveis.",
+    "ThumbnailUrl": "https://via.placeholder.com/150?text=Thumbnail+Bot+Mestre+VCV",
+    "Descricao": "<strong>Problema Solucionado:</strong> Acompanhamento ineficiente de casos de crimes contra vulneráveis.<br><br><strong>Propósito do Sistema:</strong> Automação de processos para melhorar a gestão e a eficiência na Vara de Crimes Contra Vulneráveis.<br><br><strong>Contextualização:</strong> Lançado em 2023, o Bot Mestre VCV trouxe melhorias significativas no acompanhamento e resolução de casos, utilizando tecnologia de ponta para auxiliar o sistema judicial.",
+    "ImagemUrl": "https://via.placeholder.com/800x600?text=Imagem+Bot+Mestre+VCV",
+    "VideoUrl": "https://www.youtube.com/embed/L8hwj-HuUEc?si=_rSXMS_9Podtck9U",
+    "Images": [
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+1",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+2",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+3",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+4",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+5",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+6"
+    ]
   }
 ]
