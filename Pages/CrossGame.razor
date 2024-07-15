@@ -316,6 +316,7 @@
     private string _winner = null;
     private string _selectedDifficulty = "Easy";
     private bool _isBoardActive = true;  // Controle de ativação do tabuleiro
+    private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();  // Token de cancelamento para jogada da IA
     #endregion
 
     protected override void OnInitialized()
@@ -325,6 +326,8 @@
 
     private void ResetGame()
     {
+        _cancellationTokenSource.Cancel();  // Cancelar a jogada da IA anterior, se houver
+        _cancellationTokenSource = new CancellationTokenSource();  // Criar um novo token de cancelamento
         _board = new string[3, 3];
         _winner = null;
         _isBoardActive = true;
@@ -387,24 +390,33 @@
     {
         _isBoardActive = false; // Desativar o tabuleiro durante a jogada da IA
 
-        // Simulate thinking time of 2-3 seconds
-        await Task.Delay(new Random().Next(2000, 3000));
-
-        switch (_selectedDifficulty)
+        try
         {
-            case "Easy":
-                MakeRandomMove();
-                break;
-            case "Medium":
-                MakeMediumMove();
-                break;
-            case "Hard":
-                MakeHardMove();
-                break;
-        }
+            // Simulate thinking time of 2-3 seconds
+            await Task.Delay(new Random().Next(2000, 3000), _cancellationTokenSource.Token);
 
-        _isBoardActive = true; // Reativar o tabuleiro após a jogada da IA
-        StateHasChanged(); // Atualizar a interface do usuário
+            switch (_selectedDifficulty)
+            {
+                case "Easy":
+                    MakeRandomMove();
+                    break;
+                case "Medium":
+                    MakeMediumMove();
+                    break;
+                case "Hard":
+                    MakeHardMove();
+                    break;
+            }
+        }
+        catch (TaskCanceledException)
+        {
+            // Ignorar exceção se a tarefa for cancelada
+        }
+        finally
+        {
+            _isBoardActive = true; // Reativar o tabuleiro após a jogada da IA
+            StateHasChanged(); // Atualizar a interface do usuário
+        }
     }
 
     private void MakeRandomMove()
@@ -447,7 +459,6 @@
 
     private void MakeMediumMove()
     {
-        // Implement a smarter AI strategy, such as blocking player's winning move
         if (!TryBlockPlayer())
         {
             MakeRandomMove();
@@ -466,15 +477,8 @@
                     _board[i, j] = "X";
                     if (CheckWinner())
                     {
+                        _board[i, j] = null;
                         _board[i, j] = "O";
-                        if (CheckWinner())
-                        {
-                            _winner = "O";
-                        }
-                        else
-                        {
-                            _currentPlayer = "X";
-                        }
                         return true;
                     }
                     _board[i, j] = null;
@@ -486,10 +490,122 @@
 
     private void MakeHardMove()
     {
-        // Implement a minimax algorithm or other advanced strategy
-        // For simplicity, reusing medium strategy here
-        MakeMediumMove();
+        var bestMove = FindBestMove();
+        if (bestMove != (-1, -1))
+        {
+            _board[bestMove.Item1, bestMove.Item2] = "O";
+
+            if (CheckWinner())
+            {
+                _winner = "O";
+            }
+            else if (IsBoardFull())
+            {
+                _winner = "Empate";
+            }
+            else
+            {
+                _currentPlayer = "X";
+            }
+        }
+
+        // Forçar a atualização da interface do usuário
+        StateHasChanged();
     }
+
+    private (int, int) FindBestMove()
+    {
+        int bestScore = int.MinValue;
+        (int, int) bestMove = (-1, -1);
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (_board[i, j] == null)
+                {
+                    _board[i, j] = "O";
+                    int score = Minimax(_board, 0, false);
+                    _board[i, j] = null;
+
+                    if (score > bestScore)
+                    {
+                        bestScore = score;
+                        bestMove = (i, j);
+                    }
+                }
+            }
+        }
+
+        return bestMove;
+    }
+
+    private int Minimax(string[,] board, int depth, bool isMaximizing)
+    {
+        string result = GetWinner();
+        if (result != null)
+        {
+            return result == "O" ? 10 - depth : result == "X" ? depth - 10 : 0;
+        }
+
+        if (isMaximizing)
+        {
+            int bestScore = int.MinValue;
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (board[i, j] == null)
+                    {
+                        board[i, j] = "O";
+                        int score = Minimax(board, depth + 1, false);
+                        board[i, j] = null;
+                        bestScore = Math.Max(score, bestScore);
+                    }
+                }
+            }
+            return bestScore;
+        }
+        else
+        {
+            int bestScore = int.MaxValue;
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (board[i, j] == null)
+                    {
+                        board[i, j] = "X";
+                        int score = Minimax(board, depth + 1, true);
+                        board[i, j] = null;
+                        bestScore = Math.Min(score, bestScore);
+                    }
+                }
+            }
+            return bestScore;
+        }
+    }
+
+    private string GetWinner()
+    {
+        // Check rows and columns
+        for (int i = 0; i < 3; i++)
+        {
+            if (_board[i, 0] != null && _board[i, 0] == _board[i, 1] && _board[i, 1] == _board[i, 2])
+                return _board[i, 0];
+            if (_board[0, i] != null && _board[0, i] == _board[1, i] && _board[1, i] == _board[2, i])
+                return _board[0, i];
+        }
+
+        // Check diagonals
+        if (_board[0, 0] != null && _board[0, 0] == _board[1, 1] && _board[1, 1] == _board[2, 2])
+            return _board[0, 0];
+        if (_board[0, 2] != null && _board[0, 2] == _board[1, 1] && _board[1, 1] == _board[2, 0])
+            return _board[0, 2];
+
+        return IsBoardFull() ? "Empate" : null;
+    }
+
     private bool CheckWinner()
     {
         // Check rows and columns
