@@ -1,6 +1,7 @@
 @page "/"
 
 @using BlazorDeploy.Pages.HomeComponents
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Sobre Matheus Delmondes</PageTitle>
 
@@ -367,6 +368,14 @@
     .section {
         padding: 60px 20px;
         margin-top: 10px;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .section.scroll-triggered {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .nav-tabs .nav-link {
@@ -492,3 +501,34 @@
         }
     }
 </style>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("initializeScrollAnimation");
+        }
+    }
+}
+
+<script>
+    window.initializeScrollAnimation = () => {
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('scroll-triggered');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    };
+</script>
