@@ -1,0 +1,369 @@
+﻿@page "/projetos"
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+
+@inherits ComponentBase
+
+<h2>🗂️ Projetos</h2>
+<!-- Navbar de Categorias -->
+<ul class="nav nav-tabs" id="projectTabs" role="tablist">
+    @if (ProjetosPorCategoria != null)
+    {
+        @foreach (var categoria in ProjetosPorCategoria.Keys)
+        {
+            <li class="nav-item" role="presentation">
+                <button class="nav-link @(categoriaAtiva == categoria ? "active" : "")" id="@categoria-tab" data-bs-toggle="tab" data-bs-target="#@categoria" type="button" role="tab" aria-controls="@categoria" aria-selected="@(categoriaAtiva == categoria)">@categoria</button>
+            </li>
+        }
+    }
+</ul>
+
+<!-- Conteúdo das Categorias -->
+<div class="tab-content" id="projectTabsContent">
+    @if (ProjetosPorCategoria != null)
+    {
+        @foreach (var categoria in ProjetosPorCategoria.Keys)
+        {
+            <div class="tab-pane fade @(categoriaAtiva == categoria ? "show active" : "")" id="@categoria" role="tabpanel" aria-labelledby="@categoria-tab">
+                <div id="carousel-@categoria" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach (var projeto in ProjetosPorCategoria[categoria])
+                        {
+                            <div class="carousel-item @(ProjetosPorCategoria[categoria].IndexOf(projeto) == 0 ? "active" : "")">
+                                <div class="project-card">
+                                    <h5 title="@projeto.Nome">@projeto.Nome</h5>
+                                    <p title="@projeto.Resumo">@projeto.Resumo</p>
+                                    <button class="btn btn-primary" @onclick="() => AbrirModal(projeto.Id)">Saiba mais</button>
+                                </div>
+                                <div class="py-2 text-center">
+                                    <span class="text-black">@(ProjetosPorCategoria[categoria].IndexOf(projeto) + 1)/@ProjetosPorCategoria[categoria].Count</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-@categoria" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-@categoria" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>Carregando projetos...</p>
+    }
+</div>
+
+<!-- Modal para exibir detalhes do projeto -->
+<div class="modal fade @modalClass" id="projectModal" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-black text-white">
+                <h5 class="modal-title" id="projectModalLabel">@ProjetoSelecionado?.Nome</h5>
+                <button type="button" class="btn-close btn-close-white" @onclick="FecharModal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @if (ProjetoSelecionado != null)
+                {
+                    <div class="accordion" id="accordionText">
+                    </div>
+
+                    <!-- Accordion para Imagens e Vídeo -->
+                    <div class="accordion mt-3" id="accordionProjectModal">
+                        <!-- Descrição -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingDescricao">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDescricao" aria-expanded="false" aria-controls="collapseDescricao">
+                                    📄 Descrição
+                                </button>
+                            </h2>
+                            <div id="collapseDescricao" class="accordion-collapse collapse" aria-labelledby="headingDescricao" data-bs-parent="#accordionProjectModal">
+                                <div class="accordion-body">
+                                    <p>@((MarkupString)ProjetoSelecionado.Descricao)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Imagens -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingImages">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImages" aria-expanded="false" aria-controls="collapseImages">
+                                    📷 Imagens
+                                </button>
+                            </h2>
+                            <div id="collapseImages" class="accordion-collapse collapse" aria-labelledby="headingImages" data-bs-parent="#accordionProjectModal">
+                                <div class="accordion-body">
+                                    <!-- Carousel para imagens -->
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            @foreach (var imagem in ProjetoSelecionado.Images)
+                                            {
+                                                <div class="carousel-item @(ProjetoSelecionado.Images.IndexOf(imagem) == 0 ? "active" : "")">
+                                                    <img src="@imagem" class="d-block w-100" alt="@ProjetoSelecionado.Nome">
+                                                </div>
+                                            }
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Vídeo -->
+                        @if (!string.IsNullOrEmpty(ProjetoSelecionado.VideoUrl))
+                        {
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingVideo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVideo" aria-expanded="false" aria-controls="collapseVideo">
+                                        🎥 Vídeo
+                                    </button>
+                                </h2>
+                                <div id="collapseVideo" class="accordion-collapse collapse" aria-labelledby="headingVideo" data-bs-parent="#accordionProjectModal">
+                                    <div class="accordion-body">
+                                        <div class="embed-responsive embed-responsive-16by9 mt-4">
+                                            <iframe class="embed-responsive-item" src="@ProjetoSelecionado.VideoUrl" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p>Carregando...</p>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" @onclick="FecharModal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .project-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .project-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        padding: 20px;
+        width: 100%;
+        max-width: 700px;
+        height: 250px;
+        text-align: start;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative; /* Adicionado para o z-index funcionar */
+    }
+
+        .project-card h5 {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 10px;
+        }
+
+        .project-card button {
+            margin-top: auto;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+    .modal-content {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .modal-header {
+        background-color: #333;
+        color: white;
+        border-bottom: 1px solid #444;
+        margin-inline: 14px;
+    }
+
+    .modal-footer {
+        border-top: 0;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    .btn-close-white {
+        filter: invert(1);
+    }
+
+    .accordion-button {
+        background-color: #f9f9f9;
+        color: #000;
+    }
+
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+
+    .carousel-inner img {
+        max-height: 400px;
+        object-fit: cover;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        filter: invert(1);
+    }
+
+    .embed-responsive {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+    }
+
+        .embed-responsive::before {
+            content: "";
+            display: block;
+            padding-top: 56.25%;
+        }
+
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    .accordion-button.collapsed::after {
+        filter: invert(1);
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: #000;
+        background-color: lightgray;
+    }
+
+        .accordion-button:not(.collapsed)::after {
+            filter: invert(1);
+        }
+
+    .accordion-body {
+        padding: 1rem;
+        background-color: #f9f9f9;
+    }
+
+    .btn-primary {
+        background-color: #333;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: lightskyblue;
+        }
+
+    .btn-secondary {
+        background-color: #333;
+        border: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: lightskyblue;
+        }
+
+    .carousel-control-prev, .carousel-control-next {
+        z-index: 1; /* Adiciona z-index para que os botões fiquem na frente */
+    }
+
+    .modal.show {
+        display: block;
+    }
+
+    .modal.hide {
+        display: none;
+    }
+</style>
+
+@code {
+    private List<Projeto> Projetos;
+    private Dictionary<string, List<Projeto>> ProjetosPorCategoria;
+    private Projeto ProjetoSelecionado;
+    private string categoriaAtiva;
+    private string modalClass = "hide";
+
+    protected override async Task OnInitializedAsync()
+    {
+        Projetos = await Http.GetFromJsonAsync<List<Projeto>>("sample-data/projetos.json");
+        AgruparProjetosPorCategoria();
+        categoriaAtiva = ProjetosPorCategoria.Keys.First();
+    }
+
+    private void AgruparProjetosPorCategoria()
+    {
+        ProjetosPorCategoria = Projetos
+            .GroupBy(p => p.Categoria)
+            .ToDictionary(g => g.Key, g => g.ToList());
+    }
+
+    private async Task AbrirModal(int projectId)
+    {
+        await LoadProjectDetails(projectId);
+        StateHasChanged();
+        modalClass = "show";
+    }
+
+    private void FecharModal()
+    {
+        modalClass = "hide";
+    }
+
+    private async Task LoadProjectDetails(int projectId)
+    {
+        await Task.Delay(500);
+        ProjetoSelecionado = Projetos.First(p => p.Id == projectId);
+    }
+
+    public class Projeto
+    {
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string Resumo { get; set; }
+        public string ThumbnailUrl { get; set; }
+        public string Descricao { get; set; }
+        public string ImagemUrl { get; set; }
+        public string VideoUrl { get; set; }
+        public List<string> Images { get; set; }
+        public string Categoria { get; set; }
+    }
+}

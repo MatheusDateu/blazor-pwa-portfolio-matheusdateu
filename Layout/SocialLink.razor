@@ -1,0 +1,23 @@
+﻿<a href="@Href" target="_blank" class="social-link" title="@Title">
+    <i class="@Icon"></i>
+</a>
+
+@code {
+    [Parameter] public string Href { get; set; }
+    [Parameter] public string Icon { get; set; }
+    private string Title { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Console.Out.Write(Icon);
+        SetTitle();
+    }
+
+    private void SetTitle()
+    {
+        Title = Icon.Substring(7);
+        Title = Title.Substring(0, 1).ToUpper() + Title.Substring(1);
+        if (Title.Equals("Envelope"))
+            Title = "Email";
+    }
+}

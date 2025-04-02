@@ -483,3 +483,7 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+/Layout/NavMenu.razor
+/Pages/GuessNumber.razor
+/wwwroot/index.html
+/.gitignore

@@ -1,16 +1,74 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
+<div class="page">
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        <div class="top-row px-4 bg-black">
+            <div class="social-links">
+                <SocialLink Href="https://github.com/MatheusDateu" Icon="fab fa-github" />
+                <SocialLink Href="https://www.linkedin.com/in/matheus-delmondes-7260b6221/" Icon="fab fa-linkedin" />
+                <SocialLink Href="mailto:mdelmondes5@gmail.com" Icon="fas fa-envelope" />
+                <SocialLink Href="https://www.instagram.com/dev_matheusdelmondes/" Icon="fab fa-instagram" />
+            </div>
         </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
+        <div class="container">
+            <article class="content px-4">
+                @Body
+            </article>
+        </div>
     </main>
 </div>
+
+<style>
+    .top-row {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 20px;
+        background-color: #333;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 5px;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        text-decoration: none;
+        color: white;
+        transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .social-link i {
+        font-size: 25px;
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .social-link:hover {
+        color: #f1f1f1;
+        transform: scale(1.1);
+        box-shadow: 0px 5px 15px rgba(0, 55, 110, 1);
+    }
+
+    .social-link:hover i {
+        color: lightgray;
+        transform: scale(1.1);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    @@media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+    }
+</style>

@@ -1,0 +1,128 @@
+﻿[
+  {
+    "Id": 1,
+    "Nome": "CCN: Sistema de Cadastro de Casos de Negócios",
+    "Resumo": "Sistema que auxilia o Analista de Negócios do setor de RPA do TJRR a obter e cadastrar os dados necessários para criar, atualizar e consultar Casos de Negócios",
+    "ThumbnailUrl": "https://drive.google.com/uc?export=view&id=1MobDxqNSrS_TU4_yl6c-kxgiCLj1237F",
+    "Descricao": "<strong>Problema Solucionado:</strong> As métricas não eram contabilizadas de maneira tradicional devido às movimentações registradas no Sistema Judicial do Poder Judiciário de Roraima.<br><br><strong>Propósito do Sistema:</strong> O objetivo do sistema é auxiliar no cadastro de casos de negócios. Esses casos são definidos pelos parâmetros considerados adequados pelo setor de Automação do Tribunal de Justiça de Roraima, permitindo a quantificação de atividades automatizadas.<br><br><strong>Contextualização:</strong> Durante as reuniões periódicas de apresentação dos resultados do projeto de automação no Poder Judiciário de Roraima, iniciado em 2023, enfrentávamos dificuldades para demonstrar o real benefício da automação por meio de números. Isso ocorria porque apenas as atividades que geravam movimentações em processos judiciais eram contabilizadas pelo sistema de métricas e estatísticas do Tribunal de Justiça.<br><br>Diante dessa limitação, percebemos a necessidade de abordar as contribuições reais das automações implantadas. Realizamos uma extensa reunião com autoridades dos setores de TI, Automação e Estatísticas. A partir dessa reunião, surgiu a ideia de que as automações deveriam registrar suas atividades considerando os “Casos de Negócio”. Esses casos representam conjuntos de características que tornam cada atividade única, mas também compartilham semelhanças com outras atividades. Por exemplo, uma alteração de número de telefone possui aspectos semelhantes à atividade de alteração de endereço, como cliques, tempo economizado e gatilhos (eventos que originam a necessidade da tarefa).<br><br>Dessa forma, atribuiu-se ao Analista de Negócios o registro dessas atividades. Desenvolvemos este sistema para auxiliar o Analista de Negócios a realizar o cadastro de Eventos, Atividades e, consequentemente, dos Casos de Negócio.",
+    "ImagemUrl": "https://drive.google.com/uc?export=view&id=1MobDxqNSrS_TU4_yl6c-kxgiCLj1237F",
+    "VideoUrl": "https://www.youtube.com/embed/L8hwj-HuUEc?si=_rSXMS_9Podtck9U",
+    "Images": [
+      "https://via.placeholder.com/800x600?text=CCN+Image+1",
+      "https://via.placeholder.com/800x600?text=CCN+Image+2",
+      "https://via.placeholder.com/800x600?text=CCN+Image+3",
+      "https://via.placeholder.com/800x600?text=CCN+Image+4",
+      "https://via.placeholder.com/800x600?text=CCN+Image+5",
+      "https://via.placeholder.com/800x600?text=CCN+Image+6"
+    ],
+    "Categoria": ".NET"
+  },
+  {
+    "Id": 2,
+    "Nome": "AUTOMAJUS: Ampliação da Automação no Poder Judiciário de Roraima",
+    "Resumo": "🏆 É com muito orgulho que digo que este projeto venceu o INOVAJURR 2023 - Competição de Ideias Estruturadas e Projetos de Inovação do Tribunal de Justiça de Roraima, não só em uma categoria, mas sim nas duas em que estava inscrito: Competição de Ideias Estruturadas e Competição de Ideias Estruturadas e Projetos de Inovação.",
+    "ThumbnailUrl": "https://via.placeholder.com/150?text=Thumbnail+AUTOMAJUS",
+    "Descricao": "<strong>Problema Solucionado:</strong> O processo judicial no Tribunal de Justiça de Roraima era lento e ineficiente devido à falta de automação.<br><br><strong>Propósito do Sistema:</strong> O projeto AUTOMAJUS visa implementar soluções de automação para acelerar e melhorar a eficiência dos processos judiciais.<br><br><strong>Contextualização:</strong> Em 2023, o Tribunal de Justiça de Roraima lançou uma iniciativa para modernizar suas operações, ganhando reconhecimento nacional pela inovação no setor judiciário.",
+    "ImagemUrl": "https://via.placeholder.com/800x600?text=Imagem+AUTOMAJUS",
+    "VideoUrl": "https://www.youtube.com/embed/L8hwj-HuUEc?si=_rSXMS_9Podtck9U",
+    "Images": [
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+1",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+2",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+3",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+4",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+5",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+6"
+    ],
+    "Categoria": "RPA"
+  },
+  {
+    "Id": 3,
+    "Nome": "Bot Mestre VCV: Automação Central da 'Vara de Crimes Contra Vulneráveis'",
+    "Resumo": "Sistema de automação para auxiliar na gestão e acompanhamento de casos na Vara de Crimes Contra Vulneráveis.",
+    "ThumbnailUrl": "https://via.placeholder.com/150?text=Thumbnail+Bot+Mestre+VCV",
+    "Descricao": "<strong>Problema Solucionado:</strong> Acompanhamento ineficiente de casos de crimes contra vulneráveis.<br><br><strong>Propósito do Sistema:</strong> Automação de processos para melhorar a gestão e a eficiência na Vara de Crimes Contra Vulneráveis.<br><br><strong>Contextualização:</strong> Lançado em 2023, o Bot Mestre VCV trouxe melhorias significativas no acompanhamento e resolução de casos, utilizando tecnologia de ponta para auxiliar o sistema judicial.",
+    "ImagemUrl": "https://via.placeholder.com/800x600?text=Imagem+Bot+Mestre+VCV",
+    "VideoUrl": "https://www.youtube.com/embed/L8hwj-HuUEc?si=_rSXMS_9Podtck9U",
+    "Images": [
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+1",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+2",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+3",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+4",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+5",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+6"
+    ],
+    "Categoria": "RPA"
+  },
+  {
+    "Id": 4,
+    "Nome": "AUTOMAJUS: Ampliação da Automação no Poder Judiciário de Roraima",
+    "Resumo": "🏆 É com muito orgulho que digo que este projeto venceu o INOVAJURR 2023 - Competição de Ideias Estruturadas e Projetos de Inovação do Tribunal de Justiça de Roraima, não só em uma categoria, mas sim nas duas em que estava inscrito: Competição de Ideias Estruturadas e Competição de Ideias Estruturadas e Projetos de Inovação.",
+    "ThumbnailUrl": "https://via.placeholder.com/150?text=Thumbnail+AUTOMAJUS",
+    "Descricao": "<strong>Problema Solucionado:</strong> O processo judicial no Tribunal de Justiça de Roraima era lento e ineficiente devido à falta de automação.<br><br><strong>Propósito do Sistema:</strong> O projeto AUTOMAJUS visa implementar soluções de automação para acelerar e melhorar a eficiência dos processos judiciais.<br><br><strong>Contextualização:</strong> Em 2023, o Tribunal de Justiça de Roraima lançou uma iniciativa para modernizar suas operações, ganhando reconhecimento nacional pela inovação no setor judiciário.",
+    "ImagemUrl": "https://via.placeholder.com/800x600?text=Imagem+AUTOMAJUS",
+    "VideoUrl": "https://www.youtube.com/embed/L8hwj-HuUEc?si=_rSXMS_9Podtck9U",
+    "Images": [
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+1",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+2",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+3",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+4",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+5",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+6"
+    ],
+    "Categoria": "RPA"
+  },
+  {
+    "Id": 5,
+    "Nome": "Bot Mestre VCV: Automação Central da 'Vara de Crimes Contra Vulneráveis'",
+    "Resumo": "Sistema de automação para auxiliar na gestão e acompanhamento de casos na Vara de Crimes Contra Vulneráveis.",
+    "ThumbnailUrl": "https://via.placeholder.com/150?text=Thumbnail+Bot+Mestre+VCV",
+    "Descricao": "<strong>Problema Solucionado:</strong> Acompanhamento ineficiente de casos de crimes contra vulneráveis.<br><br><strong>Propósito do Sistema:</strong> Automação de processos para melhorar a gestão e a eficiência na Vara de Crimes Contra Vulneráveis.<br><br><strong>Contextualização:</strong> Lançado em 2023, o Bot Mestre VCV trouxe melhorias significativas no acompanhamento e resolução de casos, utilizando tecnologia de ponta para auxiliar o sistema judicial.",
+    "ImagemUrl": "https://via.placeholder.com/800x600?text=Imagem+Bot+Mestre+VCV",
+    "VideoUrl": "https://www.youtube.com/embed/L8hwj-HuUEc?si=_rSXMS_9Podtck9U",
+    "Images": [
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+1",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+2",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+3",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+4",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+5",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+6"
+    ],
+    "Categoria": "RPA"
+  },
+  {
+    "Id": 6,
+    "Nome": "Sistema EasyFood: Melhoria de 7% a 66% na performance do software",
+    "Resumo": "Com a implementação de paralelismo com Threads e paginações nas principais atividades custosas do sistema, como Consultas de Notas Fiscais por Período e Geração de Relatórios, foi possível gerar até 66% de redução no tempo destes processos que antes poderiam ser bastante demorados.",
+    "ThumbnailUrl": "https://via.placeholder.com/150?text=Thumbnail+AUTOMAJUS",
+    "Descricao": "<strong>Problema Solucionado:</strong> Demora na geração de relatórios e Consultas de Notas Fiscais em períodos longos, cmo semestrais e anuais.<br><br><strong>Propósito da Implementação:</strong> Tornar os processos longos mais curtos, trazendo mais agilidade para o usuário, nas atividades mais custosas.<br><br><strong>Contextualização:</strong> Notou-se que seria deveras interessante ter uma melhoria na performance nas consultas de Notas Fiscais, pois como elas traziam muitos dados de tabelas grandiosas como de Clientes, Vendas e Produtos, acarretava em demora para conseguir trazer muitos desses dados, portanto, tornou-se, imprescindível realizar esta melhoria nos processos mais custosos do sistema, que eram na tela de consulta de notas fiscais por período e geração de relatórios de produtos em planilhas.",
+    "ImagemUrl": "https://via.placeholder.com/800x600?text=Imagem+AUTOMAJUS",
+    "VideoUrl": "https://www.youtube.com/embed/L8hwj-HuUEc?si=_rSXMS_9Podtck9U",
+    "Images": [
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+1",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+2",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+3",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+4",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+5",
+      "https://via.placeholder.com/800x600?text=AUTOMAJUS+Image+6"
+    ],
+    "Categoria": "Java"
+  },
+  {
+    "Id": 7,
+    "Nome": "Sistema EasyFood: Relatórios de Produtos em Planilhas",
+    "Resumo": "No sistema desktop da EasyFood, adicionei a funcionalidade de relatórias de produtos em planilhas .xlsx, atendendo assim a demanda de um dos clientes.",
+    "ThumbnailUrl": "https://via.placeholder.com/150?text=Thumbnail+Bot+Mestre+VCV",
+    "Descricao": "<strong>Problema Solucionado:</strong> Falta de relatórios que podem ser trabalhados de forma mais dinâmica`.<br><br><strong>Propósito da Funcionalidade:</strong> Gerar relatórios que podem ser mais facilmente manipulados para gerar gráficos, mais fáceis de ordenar, classificar filtrar e demais vantagens que trabalhar com planilhas oferece.<br><br><strong>Contextualização:</strong> Um cliente de uma pizzaria notou que relatórios em PDF não eram tão interessantes para ele, pois não conseguiria visualizar os dados de forma dinâmica, por exemplo, para fazer alguns gráficos à partir dos relatórios de forma fácil, como planilhas possibilitam, então foi solicitado que fosse adicionada a funcionalidade de gerar relatórios em planilhas.",
+    "ImagemUrl": "https://via.placeholder.com/800x600?text=Imagem+Bot+Mestre+VCV",
+    "VideoUrl": "https://www.youtube.com/embed/L8hwj-HuUEc?si=_rSXMS_9Podtck9U",
+    "Images": [
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+1",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+2",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+3",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+4",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+5",
+      "https://via.placeholder.com/800x600?text=Bot+Mestre+VCV+Image+6"
+    ],
+    "Categoria": "Java"
+  }
+]

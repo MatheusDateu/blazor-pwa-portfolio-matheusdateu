@@ -1,74 +1,533 @@
-﻿@page "/"
+@page "/"
+@using BlazorDeploy.Pages.HomeComponents
+@inject IJSRuntime JSRuntime
 
-<PageTitle>About Me</PageTitle>
+<PageTitle>Sobre Matheus Delmondes</PageTitle>
 
-<h1>🧑 Matheus Delmondes da Conceição</h1>
+<!-- Navegação -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Portfólio</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#sobre">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tecnologias">Tecnologias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#experiencias">Experiências</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#projetos">Projetos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<h2>💻 Software Engineer and RPA Developer</h2>
+<!-- Seção Sobre -->
+<section id="sobre" class="section">
+    <h2>🧑🏻‍💻 Sobre Matheus Delmondes</h2>
+    <p>👋 Olá! Sou Matheus Delmondes da Conceição, um apaixonado por tecnologia e inovação. Atualmente, estou no último ano do curso de Bacharelado em Análise e Desenvolvimento de Sistemas no IFRR, onde tenho desenvolvido habilidades que me permitem enfrentar desafios complexos com criatividade e eficiência.</p>
 
-<p>I am currently in my final year pursuing a Bachelor's degree in Analysis and Systems Development at IFRR. Since 2018, I have been deeply immersed in Dotnet and automation technologies. My aspiration is to evolve into an exceptional solutions developer with the capability to tackle any technology or challenge. While I have a strong proficiency in C# and Dotnet, I also have prior experience working with Java. Additionally, I have undertaken some studies in Python, specifically for automation tasks, including RPA, Machine Learning, and Artificial Intelligence. I am also well-versed in Typescript, Angular, JavaScript, both in Node.js and React.</p>
+    <p>💻 Desde 2018, estou imerso no universo das tecnologias .NET e automação, construindo um sólido conhecimento em C# e .NET. Minha jornada profissional também inclui uma valiosa experiência com Java, que complementa minha capacidade de desenvolver soluções robustas e eficazes.</p>
+
+    <p>🔍 Minha busca incessante pelo conhecimento me levou a explorar Python, onde apliquei essa linguagem poderosa em projetos de automação, RPA (Robotic Process Automation), Machine Learning e Inteligência Artificial. Além disso, adquiri uma sólida compreensão de TypeScript, Angular e JavaScript, utilizando tanto Node.js quanto React para criar aplicações web dinâmicas e responsivas.</p>
+
+    <p>🚀 Minha página de portfólio é uma vitrine do meu trabalho e das tecnologias que domino. Aqui, você encontrará detalhes sobre meus projetos mais significativos, desde automações complexas até aplicações web modernas. Cada projeto é uma demonstração do meu compromisso com a excelência, inovação e a busca por soluções que realmente fazem a diferença.</p>
+
+    <p>💼 Acredito que um desenvolvedor de verdade deve estar sempre preparado para enfrentar qualquer tecnologia ou desafio. Minha trajetória é marcada pela determinação em aprender e evoluir continuamente, e estou sempre pronto para aplicar esse conhecimento em novos projetos e oportunidades.</p>
+
+    <p>🌐 Convido você a explorar meu portfólio e conhecer mais sobre minhas habilidades, experiências e os projetos que me apaixonam. Vamos juntos descobrir como posso contribuir para o sucesso de sua próxima grande ideia.</p>
+
+    <p>📞 Estou sempre disponível para um bate-papo sobre tecnologia, oportunidades de colaboração ou apenas para compartilhar conhecimentos. Entre em contato comigo pelo LinkedIn, email ou Instagram.</p>
+</section>
 <hr />
 
-<h2>🛠 Skills</h2>
-
-<ul>
-    <li>C#</li>
-    <li>Dotnet</li>
-    <li>UiPath</li>
-    <li>Java</li>
-    <li>Python</li>
-    <li>JavaScript</li>
-</ul>
+<!-- Seção Tecnologias -->
+<section id="tecnologias" class="section">
+    <h2>🎨 Tecnologias</h2>
+    <div class="tech-flex">
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#">
+            <span>C#</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=.net&logoColor=white" alt=".NET">
+            <span>.NET</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/WinForms-5C2D91?style=for-the-badge&logo=windows&logoColor=white" alt="WinForms">
+            <span>WinForms</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/WPF-854DBE?style=for-the-badge&logo=windows&logoColor=white" alt="WPF">
+            <span>WPF</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Blazor-512BD4?style=for-the-badge&logo=blazor&logoColor=white" alt="Blazor">
+            <span>Blazor</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Blazor_WASM-512BD4?style=for-the-badge&logo=blazor&logoColor=white" alt="Blazor WASM">
+            <span>Blazor WASM</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Blazor_Server-512BD4?style=for-the-badge&logo=blazor&logoColor=white" alt="Blazor Server">
+            <span>Blazor Server</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/MAUI-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="MAUI">
+            <span>MAUI</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/ASP.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="ASP.NET">
+            <span>ASP.NET</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/ASP.NET_Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="ASP.NET Core">
+            <span>ASP.NET Core</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/ASP.NET_MVC-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="ASP.NET MVC">
+            <span>ASP.NET MVC</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Xamarin-3498DB?style=for-the-badge&logo=xamarin&logoColor=white" alt="Xamarin">
+            <span>Xamarin</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/UiPath-00BFFF?style=for-the-badge&logo=uipath&logoColor=white" alt="UiPath">
+            <span>UiPath</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/UiPath_Orchestrator-00BFFF?style=for-the-badge&logo=uipath&logoColor=white" alt="UiPath Orchestrator">
+            <span>UiPath Orchestrator</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/UiPath_DataServices-00BFFF?style=for-the-badge&logo=uipath&logoColor=white" alt="UiPath DataServices">
+            <span>UiPath DataServices</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white" alt="Java">
+            <span>Java</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Swing-007396?style=for-the-badge&logo=java&logoColor=white" alt="Swing">
+            <span>Swing</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring">
+            <span>Spring</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/JPA-007396?style=for-the-badge&logo=java&logoColor=white" alt="JPA">
+            <span>JPA</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+            <span>Python</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Python_RPA-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python RPA">
+            <span>Python RPA</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
+            <span>Flask</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Bottle-008000?style=for-the-badge&logo=python&logoColor=white" alt="Bottle">
+            <span>Bottle</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django">
+            <span>Django</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
+            <span>JavaScript</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js">
+            <span>Node.js</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+            <span>TypeScript</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular">
+            <span>Angular</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+            <span>PostgreSQL</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+            <span>MySQL</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white" alt="SQL Server">
+            <span>SQL Server</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML">
+            <span>HTML</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS">
+            <span>CSS</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/XAML-0C54C2?style=for-the-badge&logo=xaml&logoColor=white" alt="XAML">
+            <span>XAML</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white" alt="JSON">
+            <span>JSON</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/XML-00599C?style=for-the-badge&logo=xml&logoColor=white" alt="XML">
+            <span>XML</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/YAML-000000?style=for-the-badge&logo=yaml&logoColor=white" alt="YAML">
+            <span>YAML</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/RAZOR-512BD4?style=for-the-badge&logo=razor&logoColor=white" alt="RAZOR">
+            <span>RAZOR</span>
+        </div>
+        <div class="tech-item">
+            <img src="https://img.shields.io/badge/XHTML-1660A7?style=for-the-badge&logo=xhtml&logoColor=white" alt="XHTML">
+            <span>XHTML</span>
+        </div>
+    </div>
+</section>
 <hr />
 
-<h2>🎨 Tecnologies</h2>
+<!-- Seção Experiências -->
+<section id="experiencias" class="section">
+    <h2>📈 Experiências</h2>
+    <ul class="nav nav-tabs" id="experienceTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="sonda-tab" data-bs-toggle="tab" data-bs-target="#sonda" type="button" role="tab" aria-controls="sonda" aria-selected="true">Sonda - 2023 - Atual</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="narwal-tab" data-bs-toggle="tab" data-bs-target="#narwal" type="button" role="tab" aria-controls="narwal" aria-selected="false">Narwal Tecnologia LTDA - 2023</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="imperio-tab" data-bs-toggle="tab" data-bs-target="#imperio" type="button" role="tab" aria-controls="imperio" aria-selected="false">Império IT - 2022 - 2023</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="stirr-tab" data-bs-toggle="tab" data-bs-target="#stirr" type="button" role="tab" aria-controls="stirr" aria-selected="false">STIRR - 2022</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="experienceTabsContent">
+        <div class="tab-pane fade show active" id="sonda" role="tabpanel" aria-labelledby="sonda-tab">
+            <div class="experience">
+                <h3>Sonda</h3>
+                <p><strong>Período:</strong> Janeiro 2023 - Atual</p>
+                <p><strong>Cargo:</strong> Engenheiro de Software</p>
+                <p><strong>Contribuições:</strong></p>
+                <ul>
+                    <li>Desenvolvimento e manutenção de aplicações WEB utilizando .NET e C#.</li>
+                    <li>Implementação de soluções de automação de processos utilizando UiPath.</li>
+                    <li>Colaboração com equipes de diferentes setores para identificar e resolver problemas técnicos.</li>
+                    <li>Participação em projetos de modernização de sistemas legados.</li>
+                </ul>
+                <p><strong>Destaques:</strong></p>
+                <ul>
+                    <li>Projeto CCN: Sistema de Cadastro de Casos de Negócios <a href="link-projeto-x">Veja mais</a></li>
+                    <li>Projeto AUTOMAJUS: Projeto vencedor do INOVAJURR 2023 <a href="link-projeto-y">Veja mais</a></li>
+                    <li>Projeto Bot Mestre VCV: Automação Central da "Vara de Crimes Contra Vulneráveis" <a href="link-projeto-y">Veja mais</a></li>
+                    <li>Projeto Bot Mestre SUVIJ: Automação Central da "Secretaria Unificada da Infância e Juventude" <a href="link-projeto-y">Veja mais</a></li>
 
-<img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#">
-<img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=.net&logoColor=white" alt=".NET">
-<img src="https://img.shields.io/badge/WinForms-5C2D91?style=for-the-badge&logo=windows&logoColor=white" alt="WinForms">
-<img src="https://img.shields.io/badge/WPF-854DBE?style=for-the-badge&logo=windows&logoColor=white" alt="WPF">
-<img src="https://img.shields.io/badge/Blazor-512BD4?style=for-the-badge&logo=blazor&logoColor=white" alt="Blazor">
-<img src="https://img.shields.io/badge/Blazor_WASM-512BD4?style=for-the-badge&logo=blazor&logoColor=white" alt="Blazor WASM">
-<img src="https://img.shields.io/badge/Blazor_Server-512BD4?style=for-the-badge&logo=blazor&logoColor=white" alt="Blazor Server">
-<img src="https://img.shields.io/badge/MAUI-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="MAUI">
-<img src="https://img.shields.io/badge/ASP.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="ASP.NET">
-<img src="https://img.shields.io/badge/ASP.NET_Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="ASP.NET Core">
-<img src="https://img.shields.io/badge/ASP.NET_MVC-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="ASP.NET MVC">
-<img src="https://img.shields.io/badge/Xamarin-3498DB?style=for-the-badge&logo=xamarin&logoColor=white" alt="Xamarin">
-<img src="https://img.shields.io/badge/UiPath-00BFFF?style=for-the-badge&logo=uipath&logoColor=white" alt="UiPath">
-<img src="https://img.shields.io/badge/UiPath_Orchestrator-00BFFF?style=for-the-badge&logo=uipath&logoColor=white" alt="UiPath Orchestrator">
-<img src="https://img.shields.io/badge/UiPath_DataServices-00BFFF?style=for-the-badge&logo=uipath&logoColor=white" alt="UiPath DataServices">
-<img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white" alt="Java">
-<img src="https://img.shields.io/badge/Swing-007396?style=for-the-badge&logo=java&logoColor=white" alt="Swing">
-<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring">
-<img src="https://img.shields.io/badge/JPA-007396?style=for-the-badge&logo=java&logoColor=white" alt="JPA">
-<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-<img src="https://img.shields.io/badge/Python_RPA-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python RPA">
-<img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
-<img src="https://img.shields.io/badge/Bottle-008000?style=for-the-badge&logo=python&logoColor=white" alt="Bottle">
-<img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
-<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js">
-<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
-<img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular">
-<img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
-<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
-<img src="https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white" alt="SQL Server">
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML">
-<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS">
-<img src="https://img.shields.io/badge/XAML-0C54C2?style=for-the-badge&logo=xaml&logoColor=white" alt="XAML">
-<img src="https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white" alt="JSON">
-<img src="https://img.shields.io/badge/XML-00599C?style=for-the-badge&logo=xml&logoColor=white" alt="XML">
-<img src="https://img.shields.io/badge/YAML-000000?style=for-the-badge&logo=yaml&logoColor=white" alt="YAML">
-<img src="https://img.shields.io/badge/RAZOR-512BD4?style=for-the-badge&logo=razor&logoColor=white" alt="RAZOR">
-<img src="https://img.shields.io/badge/XHTML-1660A7?style=for-the-badge&logo=xhtml&logoColor=white" alt="XHTML">
-
+                </ul>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="narwal" role="tabpanel" aria-labelledby="narwal-tab">
+            <div class="experience">
+                <h3>Narwal Tecnologia LTDA</h3>
+                <p><strong>Período:</strong> Março 2023 - Dezembro 2023</p>
+                <p><strong>Cargo:</strong> Engenheiro de Software</p>
+                <p><strong>Contribuições:</strong></p>
+                <ul>
+                    <li>Desenvolvimento de APIs RESTful utilizando Java e Spring Boot.</li>
+                    <li>Criação de soluções de backend escaláveis e seguras.</li>
+                    <li>Melhoria na performance de sistemas existentes através de análise e otimização de código.</li>
+                    <li>Trabalho em equipe para definição de requisitos e planejamento de projetos.</li>
+                </ul>
+                <p><strong>Destaques:</strong></p>
+                <ul>
+                    <li>Projeto A: Descrição breve do projeto <a href="link-projeto-a">Veja mais</a></li>
+                    <li>Projeto B: Descrição breve do projeto <a href="link-projeto-b">Veja mais</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="imperio" role="tabpanel" aria-labelledby="imperio-tab">
+            <div class="experience">
+                <h3>Império IT</h3>
+                <p><strong>Período:</strong> Janeiro 2022 - Janeiro 2023</p>
+                <p><strong>Cargo:</strong> Engenheiro de Software</p>
+                <p><strong>Contribuições:</strong></p>
+                <ul>
+                    <li>Desenvolvimento de APIs RESTful utilizando Java e Spring Boot.</li>
+                    <li>Criação de soluções de backend escaláveis e seguras.</li>
+                    <li>Melhoria na performance de sistemas existentes através de análise e otimização de código.</li>
+                    <li>Trabalho em equipe para definição de requisitos e planejamento de projetos.</li>
+                </ul>
+                <p><strong>Destaques:</strong></p>
+                <ul>
+                    <li>Projeto C: Descrição breve do projeto <a href="link-projeto-c">Veja mais</a></li>
+                    <li>Projeto D: Descrição breve do projeto <a href="link-projeto-d">Veja mais</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="stirr" role="tabpanel" aria-labelledby="stirr-tab">
+            <div class="experience">
+                <h3>STIRR - Soluções em Tecnologia da Informação</h3>
+                <p><strong>Período:</strong> Janeiro 2022 - Dezembro 2022</p>
+                <p><strong>Cargo:</strong> Analista de Sistemas</p>
+                <p><strong>Contribuições:</strong></p>
+                <ul>
+                    <li>Desenvolvimento de APIs RESTful utilizando Java e Spring Boot.</li>
+                    <li>Criação de soluções de backend escaláveis e seguras.</li>
+                    <li>Melhoria na performance de sistemas existentes através de análise e otimização de código.</li>
+                    <li>Trabalho em equipe para definição de requisitos e planejamento de projetos.</li>
+                </ul>
+                <p><strong>Destaques:</strong></p>
+                <ul>
+                    <li>Projeto E: Descrição breve do projeto <a href="link-projeto-e">Veja mais</a></li>
+                    <li>Projeto F: Descrição breve do projeto <a href="link-projeto-f">Veja mais</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 <hr />
-<h2>📞 Contact</h2>
 
-<ul>
-    <li>LinkedIn: <a href="https://www.linkedin.com/in/matheus-delmondes-7260b6221/">Matheus Delmondes</a></li>
-    <li>Email: mdelmondes5@gmail.com</li>
-    <li>Instagram: <a href="https://www.instagram.com/dev_matheusdelmondes/">@@dev_MatheusDelmondes</a></li>
-</ul>
+<!-- Seção Projetos -->
+<section id="projetos" class="section">
+    <Projects />
+</section>
 
+<!-- Estilos CSS -->
+<style>
+    .navbar {
+        position: relative;
+        top: 0;
+        width: 100%;
+        background-color: #333;
+        overflow: hidden;
+        text-align: center;
+    }
+
+        .navbar a {
+            padding: 14px 20px;
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease;
+        }
+
+            .navbar a:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: linear-gradient(180deg, #999999 0%, #f1f1f1 90%);
+                z-index: -1;
+                transition: transform 0.3s ease;
+                transform: scaleY(0);
+                transform-origin: bottom;
+            }
+
+            .navbar a:hover:before {
+                transform: scaleY(1);
+            }
+
+            .navbar a:hover {
+                color: black;
+                border: 0px;
+                border-radius: 4px;
+            }
+
+    .section {
+        padding: 60px 20px;
+        margin-top: 10px;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .section.scroll-triggered {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-tabs .nav-link {
+        border: none;
+        border-bottom: 2px solid transparent;
+        color: #333;
+        transition: color 0.3s ease, border-bottom-color 0.3s ease;
+    }
+
+        .nav-tabs .nav-link:hover {
+            color: white;
+            background-color: black;
+            transition: ease-in-out .5s;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: black;
+            border-bottom-color: black;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+            .nav-tabs .nav-link.active:hover {
+                color: lightskyblue;
+                box-shadow: 0 6px 12px rgba(0, 85, 255, 0.5);
+            }
+
+    .tab-content {
+        margin-top: 20px;
+    }
+
+    .experience {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+        .experience h3 {
+            margin-top: 0;
+        }
+
+        .experience p {
+            margin: 5px 0;
+        }
+
+        .experience ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+            .experience ul li {
+                margin-bottom: 5px;
+            }
+
+    .tech-flex {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tech-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f1f1f1;
+        border-radius: 8px;
+        padding: 20px;
+        width: 150px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+        animation: fadeInUp 3s both;
+    }
+
+        .tech-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .tech-item span {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@media (max-width: 600px) {
+        .navbar a {
+            display: block;
+            text-align: left;
+        }
+
+        .section {
+            padding: 20px;
+        }
+
+        .tech-grid {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .skills-grid {
+            flex-direction: column;
+            gap: 15px;
+        }
+    }
+</style>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("initializeScrollAnimation");
+        }
+    }
+}
+
+<script>
+    window.initializeScrollAnimation = () => {
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('scroll-triggered');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    };
+</script>
