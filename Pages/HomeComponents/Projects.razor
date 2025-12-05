@@ -2,13 +2,14 @@
 @using BlazorDeploy.Models
 @using BlazorDeploy.Services
 @inject IPortfolioService PortfolioService
+@inject ModalService ModService
 @inject IJSRuntime JSRuntime
 
 @inherits ComponentBase
 
 <h2>🗂️ Projetos</h2>
 
-@if (ProjetosPorCategoria == null)
+@if (ProjectsByCategory == null)
 {
     <div class="d-flex justify-content-center my-5">
         <div class="spinner-border text-primary" role="status">
@@ -19,10 +20,10 @@
 else
 {
     <ul class="nav nav-tabs" id="projectTabs" role="tablist">
-        @foreach (var categoria in ProjetosPorCategoria.Keys)
+        @foreach (var categoria in ProjectsByCategory.Keys)
         {
             <li class="nav-item" role="presentation">
-                <button class="nav-link @(categoriaAtiva == categoria ? "active" : "")" 
+                <button class="nav-link @(categoriaAtiva == categoria ? "active" : "")"
                         @onclick="() => SetActiveCategory(categoria)"
                         type="button" role="tab">
                     @categoria
@@ -32,28 +33,29 @@ else
     </ul>
 
     <div class="tab-content mt-3" id="projectTabsContent">
-        @foreach (var categoria in ProjetosPorCategoria.Keys)
+        @foreach (var categoria in ProjectsByCategory.Keys)
         {
             <div class="tab-pane fade @(categoriaAtiva == categoria ? "show active" : "")" role="tabpanel">
-                
+
                 <div id="carousel-@categoria.Replace(" ", "-")" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        @foreach (var projeto in ProjetosPorCategoria[categoria])
+                        @foreach (var projeto in ProjectsByCategory[categoria])
                         {
-                            <div class="carousel-item @(ProjetosPorCategoria[categoria].IndexOf(projeto) == 0 ? "active" : "")">
+                            <div class="carousel-item @(ProjectsByCategory[categoria].IndexOf(projeto) == 0 ? "active" : "")">
                                 <div class="project-card mx-auto">
                                     <h5 title="@projeto.Name">@projeto.Name</h5>
                                     <p title="@projeto.Synopsis">@projeto.Synopsis</p>
-                                    <button class="btn btn-primary" @onclick="() => AbrirModal(projeto)">Saiba mais</button>
+
+                                    <button class="btn btn-primary" @onclick="() => ModService.Show(projeto)">Saiba mais</button>
                                 </div>
                                 <div class="py-2 text-center">
-                                    <span class="text-black">@(ProjetosPorCategoria[categoria].IndexOf(projeto) + 1)/@ProjetosPorCategoria[categoria].Count</span>
+                                    <span class="text-black">@(ProjectsByCategory[categoria].IndexOf(projeto) + 1)/@ProjectsByCategory[categoria].Count</span>
                                 </div>
                             </div>
                         }
                     </div>
-                    
-                    @if (ProjetosPorCategoria[categoria].Count > 1)
+
+                    @if (ProjectsByCategory[categoria].Count > 1)
                     {
                         <button class="carousel-control-prev" type="button" data-bs-target="#carousel-@categoria.Replace(" ", "-")" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
@@ -70,141 +72,43 @@ else
     </div>
 }
 
-<div class="modal fade @modalClass" id="projectModal" tabindex="-1" aria-hidden="true" style="@(modalClass == "show" ? "display:block; background-color: rgba(0,0,0,0.5);" : "")">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header bg-black text-white">
-                <h5 class="modal-title">@ProjetoSelecionado?.Name</h5>
-                <button type="button" class="btn-close btn-close-white" @onclick="FecharModal" aria-label="Close"></button>
-            </div>
-            
-            <div class="modal-body">
-                @if (ProjetoSelecionado != null)
-                {
-                    <div class="accordion" id="accordionProjectModal">
-                        
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingDescricao">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDescricao" aria-expanded="true" aria-controls="collapseDescricao">
-                                    📄 Descrição
-                                </button>
-                            </h2>
-                            <div id="collapseDescricao" class="accordion-collapse collapse show" data-bs-parent="#accordionProjectModal">
-                                <div class="accordion-body">
-                                    <p>@((MarkupString)ProjetoSelecionado.Description)</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingImages">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImages" aria-expanded="false" aria-controls="collapseImages">
-                                    📷 Imagens
-                                </button>
-                            </h2>
-                            <div id="collapseImages" class="accordion-collapse collapse" data-bs-parent="#accordionProjectModal">
-                                <div class="accordion-body">
-                                    <div id="carouselModalIndicators" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            @if (ProjetoSelecionado.ImagesUrl != null && ProjetoSelecionado.ImagesUrl.Any())
-                                            {
-                                                @foreach (var imagem in ProjetoSelecionado.ImagesUrl)
-                                                {
-                                                    <div class="carousel-item @(ProjetoSelecionado.ImagesUrl.IndexOf(imagem) == 0 ? "active" : "")">
-                                                        <img src="@imagem" class="d-block w-100 rounded" alt="Project Image">
-                                                    </div>
-                                                }
-                                            }
-                                            else 
-                                            {
-                                                <p class="text-center text-muted">Sem imagens disponíveis.</p>
-                                            }
-                                        </div>
-                                        @if (ProjetoSelecionado.ImagesUrl != null && ProjetoSelecionado.ImagesUrl.Count > 1)
-                                        {
-                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselModalIndicators" data-bs-slide="prev">
-                                                <span class="carousel-control-prev-icon bg-dark rounded" aria-hidden="true"></span>
-                                            </button>
-                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselModalIndicators" data-bs-slide="next">
-                                                <span class="carousel-control-next-icon bg-dark rounded" aria-hidden="true"></span>
-                                            </button>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        @if (!string.IsNullOrEmpty(ProjetoSelecionado.VideoUrl))
-                        {
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingVideo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVideo" aria-expanded="false" aria-controls="collapseVideo">
-                                        🎥 Vídeo
-                                    </button>
-                                </h2>
-                                <div id="collapseVideo" class="accordion-collapse collapse" data-bs-parent="#accordionProjectModal">
-                                    <div class="accordion-body">
-                                        <div class="ratio ratio-16x9">
-                                            <iframe src="@ProjetoSelecionado.VideoUrl" allowfullscreen></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                }
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" @onclick="FecharModal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @code {
-    // We utilize the mapped models directly instead of the local class
     private List<PortfolioProject> Projetos;
-    private List<ProjectCategory> Categorias;
-    
-    // Grouping by String (Category Name) -> List of Projects
-    private Dictionary<string, List<PortfolioProject>> ProjetosPorCategoria;
-    
-    private PortfolioProject? ProjetoSelecionado;
+    private List<ProjectCategory> Categories;
+
+    private Dictionary<string, List<PortfolioProject>> ProjectsByCategory;
+
     private string categoriaAtiva;
-    private string modalClass = "hide";
 
     protected override async Task OnInitializedAsync()
     {
-        // Fetch data concurrently from Supabase via our Service
         var categoriesTask = PortfolioService.GetCategoriesAsync();
         var projectsTask = PortfolioService.GetProjectsAsync();
 
         await Task.WhenAll(categoriesTask, projectsTask);
 
-        Categorias = await categoriesTask;
+        Categories = await categoriesTask;
         Projetos = await projectsTask;
 
-        AgruparProjetosPorCategoria();
-        
-        if (ProjetosPorCategoria.Any())
+        GroupProjectsByCategory();
+
+        if (ProjectsByCategory.Any())
         {
-            categoriaAtiva = ProjetosPorCategoria.Keys.First();
+            categoriaAtiva = ProjectsByCategory.Keys.First();
         }
     }
 
-    private void AgruparProjetosPorCategoria()
+    private void GroupProjectsByCategory()
     {
-        ProjetosPorCategoria = new Dictionary<string, List<PortfolioProject>>();
+        ProjectsByCategory = new Dictionary<string, List<PortfolioProject>>();
 
-        // Logic to join Projects with Category Names
-        foreach (var cat in Categorias)
+        foreach (var cat in Categories)
         {
-            // Filter projects belonging to this category
             var projectsInCat = Projetos.Where(p => p.CategoryId == cat.Id).ToList();
 
             if (projectsInCat.Any())
             {
-                ProjetosPorCategoria.Add(cat.Name, projectsInCat);
+                ProjectsByCategory.Add(cat.Name, projectsInCat);
             }
         }
     }
@@ -212,20 +116,6 @@ else
     private void SetActiveCategory(string categoryName)
     {
         categoriaAtiva = categoryName;
-    }
-
-    // Changed parameter to receive the object directly, avoiding a second lookup
-    private void AbrirModal(PortfolioProject projeto)
-    {
-        ProjetoSelecionado = projeto;
-        modalClass = "show";
-        StateHasChanged();
-    }
-
-    private void FecharModal()
-    {
-        modalClass = "hide";
-        StateHasChanged(); // Ensure UI updates
     }
 }
 
@@ -249,7 +139,7 @@ else
         height: 250px;
         text-align: start;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative; /* Adicionado para o z-index funcionar */
+        position: relative;
     }
 
         .project-card h5 {
@@ -277,118 +167,12 @@ else
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-    .modal-content {
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        padding: 20px;
-    }
-
-    .modal-header {
-        background-color: #333;
-        color: white;
-        border-bottom: 1px solid #444;
-        margin-inline: 14px;
-    }
-
-    .modal-footer {
-        border-top: 0;
-        padding-top: 2px;
-        padding-bottom: 2px;
-    }
-
-    .btn-close-white {
-        filter: invert(1);
-    }
-
-    .accordion-button {
-        background-color: #f9f9f9;
-        color: #000;
-    }
-
-        .accordion-button:focus {
-            box-shadow: none;
-        }
-
-    .carousel-inner img {
-        max-height: 400px;
-        object-fit: cover;
-    }
-
     .carousel-control-prev-icon,
     .carousel-control-next-icon {
         filter: invert(1);
     }
 
-    .embed-responsive {
-        position: relative;
-        display: block;
-        width: 100%;
-        padding: 0;
-        overflow: hidden;
-    }
-
-        .embed-responsive::before {
-            content: "";
-            display: block;
-            padding-top: 56.25%;
-        }
-
-    .embed-responsive-item {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-    }
-
-    .accordion-button.collapsed::after {
-        filter: invert(1);
-    }
-
-    .accordion-button:not(.collapsed) {
-        color: #000;
-        background-color: lightgray;
-    }
-
-        .accordion-button:not(.collapsed)::after {
-            filter: invert(1);
-        }
-
-    .accordion-body {
-        padding: 1rem;
-        background-color: #f9f9f9;
-    }
-
-    .btn-primary {
-        background-color: #333;
-        border: none;
-    }
-
-        .btn-primary:hover {
-            background-color: lightskyblue;
-        }
-
-    .btn-secondary {
-        background-color: #333;
-        border: none;
-    }
-
-        .btn-secondary:hover {
-            background-color: lightskyblue;
-        }
-
     .carousel-control-prev, .carousel-control-next {
-        z-index: 1; /* Adiciona z-index para que os botões fiquem na frente */
-    }
-
-    .modal.show {
-        display: block;
-    }
-
-    .modal.hide {
-        display: none;
+        z-index: 1;
     }
 </style>
