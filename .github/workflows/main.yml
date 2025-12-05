@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branchs: ["main"]
+    branches: ["main"]
 
   workflow_dispatch:
 
@@ -43,6 +43,10 @@ jobs:
       - name: Publish .NET
         run: dotnet publish BlazorDeploy.csproj -c:Release -o docs --nologo
 
+      - name: Fix href base in index.html
+        run: |
+          sed -i 's|<base href="[^"]*" />|<base href="https://matheusdateu.github.io/blazor-pwa-portfolio-matheusdateu/" />|' docs/wwwroot/index.html
+      
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
