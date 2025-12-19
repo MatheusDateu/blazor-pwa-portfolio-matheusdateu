@@ -77,10 +77,10 @@ else
 </section>
 
 @code {
-    private List<PortfolioProject> Projetos;
-    private List<ProjectCategory> Categories;
+    private List<PortfolioProjectModel> Projetos;
+    private List<ProjectCategoryModel> Categories;
 
-    private Dictionary<string, List<PortfolioProject>> ProjectsByCategory;
+    private Dictionary<string, List<PortfolioProjectModel>> ProjectsByCategory;
 
     private string categoriaAtiva;
 
@@ -104,7 +104,7 @@ else
 
     private void GroupProjectsByCategory()
     {
-        ProjectsByCategory = new Dictionary<string, List<PortfolioProject>>();
+        ProjectsByCategory = new Dictionary<string, List<PortfolioProjectModel>>();
 
         foreach (var cat in Categories)
         {

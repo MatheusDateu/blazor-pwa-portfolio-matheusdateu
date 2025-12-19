@@ -10,11 +10,17 @@ namespace BlazorDeploy.Services
         /// <summary>
         /// Retrieves all projects ordered by creation date (newest first).
         /// </summary>
-        Task<List<PortfolioProject>> GetProjectsAsync();
+        Task<List<PortfolioProjectModel>> GetProjectsAsync();
 
         /// <summary>
         /// Retrieves all available project categories.
         /// </summary>
-        Task<List<ProjectCategory>> GetCategoriesAsync();
+        Task<List<ProjectCategoryModel>> GetCategoriesAsync();
+        
+        /// <summary>
+        /// Retrieves information about Matheus Delmondes.
+        /// </summary>
+        /// <returns></returns>
+        Task<List<AboutMatheusDelmondesModel>> GetAboutMatheusDelmondesAsync();
     }
 }

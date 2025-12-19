@@ -1,18 +1,216 @@
-﻿@inherits ComponentBase
+﻿@using BlazorDeploy.Models
+@using BlazorDeploy.Services
 
-<section id="sobre" class="section">
-    <h2>🧑🏻‍💻 Sobre Matheus Delmondes</h2>
-    <p>👋 Olá! Sou Matheus Delmondes da Conceição, um apaixonado por tecnologia e inovação. Atualmente, estou no último ano do curso de Bacharelado em Análise e Desenvolvimento de Sistemas no IFRR, onde tenho desenvolvido habilidades que me permitem enfrentar desafios complexos com criatividade e eficiência.</p>
+@inject IPortfolioService PortfolioService
 
-    <p>💻 Desde 2018, estou imerso no universo das tecnologias .NET e automação, construindo um sólido conhecimento em C# e .NET. Minha jornada profissional também inclui uma valiosa experiência com Java, que complementa minha capacidade de desenvolver soluções robustas e eficazes.</p>
+@inherits ComponentBase
 
-    <p>🔍 Minha busca incessante pelo conhecimento me levou a explorar Python, onde apliquei essa linguagem poderosa em projetos de automação, RPA (Robotic Process Automation), Machine Learning e Inteligência Artificial. Além disso, adquiri uma sólida compreensão de TypeScript, Angular e JavaScript, utilizando tanto Node.js quanto React para criar aplicações web dinâmicas e responsivas.</p>
+<section id="sobre" class="section-about">
+    @if (AboutMatheusDelmondesModels == null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        var about = AboutMatheusDelmondesModels.First();
 
-    <p>🚀 Minha página de portfólio é uma vitrine do meu trabalho e das tecnologias que domino. Aqui, você encontrará detalhes sobre meus projetos mais significativos, desde automações complexas até aplicações web modernas. Cada projeto é uma demonstração do meu compromisso com a excelência, inovação e a busca por soluções que realmente fazem a diferença.</p>
+        <div class="container">
+            <div class="text-center mb-5 animate-up">
+                <h2 class="display-5 fw-bold mb-3">@about.AboutMeTitle</h2>
+                <div class="lead text-muted mx-auto" style="max-width: 800px;">
+                    @((MarkupString)about.AboutMeContent)
+                </div>
+                <div class="mt-4 p-3 bg-light rounded-3 d-inline-block shadow-sm">
+                    <h5 class="fw-bold mb-2">@about.AboutPortfolioTitle</h5>
+                    <p class="mb-0 small text-secondary">@about.AboutPortfolioContent</p>
+                </div>
+            </div>
 
-    <p>💼 Acredito que um desenvolvedor de verdade deve estar sempre preparado para enfrentar qualquer tecnologia ou desafio. Minha trajetória é marcada pela determinação em aprender e evoluir continuamente, e estou sempre pronto para aplicar esse conhecimento em novos projetos e oportunidades.</p>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6 animate-up delay-1">
+                    <div class="card h-100 border-0 shadow-hover card-mindset">
+                        <div class="card-body p-4">
+                            <div class="icon-box bg-primary-subtle text-primary mb-3">
+                                <i class="bi bi-cpu"></i> 🧠
+                            </div>
+                            <h3 class="h4 card-title fw-bold">@about.DeveloperMindsetTitle</h3>
+                            <p class="card-text text-secondary">@about.DeveloperMindsetContent</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 animate-up delay-2">
+                    <div class="card h-100 border-0 shadow-hover card-mindset">
+                        <div class="card-body p-4">
+                            <div class="icon-box bg-success-subtle text-success mb-3">
+                                <i class="bi bi-people"></i>
+                                🚀
+                            </div>
+                            <h3 class="h4 card-title fw-bold">@about.TechLeadMindsetTitle</h3>
+                            <p class="card-text text-secondary">@about.TechLeadMindsetContent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <p>🌐 Convido você a explorar meu portfólio e conhecer mais sobre minhas habilidades, experiências e os projetos que me apaixonam. Vamos juntos descobrir como posso contribuir para o sucesso de sua próxima grande ideia.</p>
+            <h3 class="text-center mb-4 fw-bold">Domínio Tecnológico</h3>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6 col-lg-4 animate-up delay-1">
+                    <div class="card h-100 border-start border-4 border-primary shadow-sm card-tech">
+                        <div class="card-body">
+                            <h4 class="h5 fw-bold text-primary">@about.DotnetAndAutomationTitle</h4>
+                            <p class="small text-secondary mb-0">@about.DotnetAndAutomationContent</p>
+                        </div>
+                    </div>
+                </div>
 
-    <p>📞 Estou sempre disponível para um bate-papo sobre tecnologia, oportunidades de colaboração ou apenas para compartilhar conhecimentos. Entre em contato comigo pelo LinkedIn, email ou Instagram.</p>
+                <div class="col-md-6 col-lg-4 animate-up delay-2">
+                    <div class="card h-100 border-start border-4 border-warning shadow-sm card-tech">
+                        <div class="card-body">
+                            <h4 class="h5 fw-bold text-warning">@about.PythonAndAutomationTitle</h4>
+                            <p class="small text-secondary mb-0">@about.PythonAndAutomationContent</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 animate-up delay-3">
+                    <div class="card h-100 border-start border-4 border-danger shadow-sm card-tech">
+                        <div class="card-body">
+                            <h4 class="h5 fw-bold text-danger">@about.JavaAndSpringTitle</h4>
+                            <p class="small text-secondary mb-0">@about.JavaAndSpringContent</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 animate-up delay-4">
+                    <div class="card h-100 bg-dark text-white shadow-sm card-tech">
+                        <div class="card-body">
+                            <h4 class="h5 fw-bold">@about.AngularAndReactTitle</h4>
+                            <p class="small opacity-75 mb-0">@about.AngularAndReactContent</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 animate-up delay-5">
+                    <div class="card h-100 bg-secondary text-white shadow-sm card-tech">
+                        <div class="card-body">
+                            <h4 class="h5 fw-bold">@about.MobileAndMultiplatformTitle</h4>
+                            <p class="small opacity-75 mb-0">@about.MobileAndMultiplatformContent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-box text-center p-5 rounded-4 animate-up delay-3">
+                <h3 class="fw-bold mb-3">@about.InvitationTitle</h3>
+                <p class="mb-4 text-muted mx-auto" style="max-width: 600px;">@about.InvitationContent</p>
+
+                <div class="contact-highlight p-3 bg-white rounded-3 shadow-sm d-inline-block">
+                    <h5 class="fw-bold text-primary mb-1">@about.ContactTitle</h5>
+                    <p class="mb-0">@about.ContactContent</p>
+                </div>
+            </div>
+        </div>
+    }
 </section>
+
+@code {
+    private List<AboutMatheusDelmondesModel> AboutMatheusDelmondesModels { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        AboutMatheusDelmondesModels = await PortfolioService.GetAboutMatheusDelmondesAsync();
+    }
+}
+
+<style>
+    .section-about {
+        padding: 80px 0;
+        background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+    }
+
+    /* Cards com efeito de elevação */
+    .shadow-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .shadow-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+
+    /* Ícones de Mindset */
+    .icon-box {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    /* Cards de Tecnologia */
+    .card-tech {
+        transition: transform 0.2s ease;
+    }
+
+        .card-tech:hover {
+            transform: scale(1.02);
+        }
+
+    /* CTA Box */
+    .cta-box {
+        background: rgb(240,242,245);
+        background: linear-gradient(135deg, rgba(240,242,245,1) 0%, rgba(255,255,255,1) 100%);
+        border: 1px solid #e9ecef;
+    }
+
+    /* Animações simples de entrada */
+    .animate-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .delay-1 {
+        animation-delay: 0.1s;
+    }
+
+    .delay-2 {
+        animation-delay: 0.2s;
+    }
+
+    .delay-3 {
+        animation-delay: 0.3s;
+    }
+
+    .delay-4 {
+        animation-delay: 0.4s;
+    }
+
+    .delay-5 {
+        animation-delay: 0.5s;
+    }
+
+    @@keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Mobile adjustments */
+    @@media (max-width: 768px) {
+        .display-5 {
+            font-size: 2rem;
+        }
+
+        .p-5 {
+            padding: 2rem !important;
+        }
+    }
+</style>
