@@ -4,7 +4,7 @@ namespace BlazorDeploy.Services
 {
     public interface IModalService
     {
-        public void Show(PortfolioProject project);
+        public void Show(PortfolioProjectModel project);
         public void Close();
     }
 }

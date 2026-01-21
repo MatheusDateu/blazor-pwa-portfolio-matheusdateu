@@ -15,12 +15,12 @@ namespace BlazorDeploy.Services
             _supabaseClient = supabaseClient;
         }
 
-        public async Task<List<ProjectCategory>> GetCategoriesAsync()
+        public async Task<List<ProjectCategoryModel>> GetCategoriesAsync()
         {
             try
             {
                 var response = await _supabaseClient
-                    .From<ProjectCategory>()
+                    .From<ProjectCategoryModel>()
                     .Order(x => x.Id, Supabase.Postgrest.Constants.Ordering.Ascending)
                     .Get();
                 return response.Models;
@@ -28,16 +28,16 @@ namespace BlazorDeploy.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"[Error] Failed to fetch categories: {ex.Message}");
-                return new List<ProjectCategory>();
+                return new List<ProjectCategoryModel>();
             }
         }
 
-        public async Task<List<PortfolioProject>> GetProjectsAsync()
+        public async Task<List<PortfolioProjectModel>> GetProjectsAsync()
         {
             try
             {
                 var response = await _supabaseClient
-                .From<PortfolioProject>()
+                .From<PortfolioProjectModel>()
                 .Order(x => x.Id, Supabase.Postgrest.Constants.Ordering.Ascending)
                 .Get();
                 return response.Models;
@@ -45,7 +45,24 @@ namespace BlazorDeploy.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"[Error] Failed to initialise project list: {ex.Message}");
-                return new List<PortfolioProject>();
+                return new List<PortfolioProjectModel>();
+            }
+        }
+
+        public async Task<List<AboutMatheusDelmondesModel>> GetAboutMatheusDelmondesAsync()
+        {
+            try
+            {
+                var response = await _supabaseClient
+                    .From<AboutMatheusDelmondesModel>()
+                    .Order(x => x.Id, Supabase.Postgrest.Constants.Ordering.Ascending)
+                    .Get();
+                return response.Models;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Error] Failed to fetch about Matheus Delmondes: {ex.Message}");
+                return new List<AboutMatheusDelmondesModel>();
             }
         }
     }
