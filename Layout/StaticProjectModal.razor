@@ -96,7 +96,7 @@
 
 @code {
     private bool isVisible = false;
-    private PortfolioProject? Project;
+    private PortfolioProjectModel? Project;
 
     protected override void OnInitialized()
     {
@@ -105,7 +105,7 @@
         ModalService.OnClose += CloseModal;
     }
 
-    private void ShowModal(PortfolioProject project)
+    private void ShowModal(PortfolioProjectModel project)
     {
         Project = project;
         isVisible = true;
