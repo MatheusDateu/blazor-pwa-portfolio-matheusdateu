@@ -1,0 +1,63 @@
+﻿.accordion-item {
+    border: 1px solid rgba(0,0,0,0.125);
+    background-color: transparent;
+}
+
+.accordion-button {
+    background-color: #fff;
+    color: #333;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: none !important;
+}
+
+    .accordion-button:not(.collapsed),
+    .accordion-button:hover {
+        background-color: #000;
+        color: #fff;
+        border-color: #000;
+    }
+
+        .accordion-button:not(.collapsed)::after,
+        .accordion-button:hover::after {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+.tech-item-card {
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    padding: 20px;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+    .tech-item-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: #fff;
+    }
+
+    .tech-item-card h5 {
+        color: #333;
+        font-weight: 700;
+    }
+
+.badge-tech {
+    background-color: #e0e0e0;
+    color: #333;
+    border: 1px solid #d0d0d0;
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+.btn-outline-custom {
+    color: #333;
+    border-color: #333;
+}
+
+    .btn-outline-custom:hover {
+        background-color: #1b6ec2;
+        border-color: #1b6ec2;
+        color: #fff;
+    }

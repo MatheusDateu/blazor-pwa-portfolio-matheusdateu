@@ -65,5 +65,22 @@ namespace BlazorDeploy.Services
                 return new List<AboutMatheusDelmondesModel>();
             }
         }
+
+        public async Task<List<TechCategoryModel>> GetTechStackAsync()
+        {
+            try
+            {
+                var response = await _supabaseClient
+                    .From<TechCategoryModel>()
+                    .Order("display_order", Supabase.Postgrest.Constants.Ordering.Ascending)
+                    .Get();
+                return response.Models.Where(x => x.IsActive).ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Error] Failed to fetch Tech Stack: {ex.Message}");
+                return new List<TechCategoryModel>();
+            }
+        }
     }
 }
