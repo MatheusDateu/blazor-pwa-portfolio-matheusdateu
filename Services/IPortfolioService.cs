@@ -22,5 +22,11 @@ namespace BlazorDeploy.Services
         /// </summary>
         /// <returns></returns>
         Task<List<AboutMatheusDelmondesModel>> GetAboutMatheusDelmondesAsync();
+
+        /// <summary>
+        /// Retrieves the technology stack categories and their associated technologies.
+        /// </summary>
+        /// <returns></returns>
+        Task<List<TechCategoryModel>> GetTechStackAsync();
     }
 }

@@ -1,163 +1,94 @@
-﻿@inherits ComponentBase
+﻿@using BlazorDeploy.Models
+@using BlazorDeploy.Services
+@inject IPortfolioService PortfolioService
+@inject NavigationManager NavManager
 
 <section id="tecnologias" class="section">
-    <h2>🎨 Tecnologias</h2>
-    <div class="tech-flex">
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#">
-            <span>C#</span>
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold" style="color: #333;">
+                <i class="fa-solid fa-code me-2"></i>Stack & Ferramentas
+            </h2>
+            <p class="text-muted">
+                Tecnologias que domino e como as aplico em soluções reais.
+            </p>
         </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=.net&logoColor=white" alt=".NET">
-            <span>.NET</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/WinForms-5C2D91?style=for-the-badge&logo=windows&logoColor=white" alt="WinForms">
-            <span>WinForms</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/WPF-854DBE?style=for-the-badge&logo=windows&logoColor=white" alt="WPF">
-            <span>WPF</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Blazor-512BD4?style=for-the-badge&logo=blazor&logoColor=white" alt="Blazor">
-            <span>Blazor</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Blazor_WASM-512BD4?style=for-the-badge&logo=blazor&logoColor=white" alt="Blazor WASM">
-            <span>Blazor WASM</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Blazor_Server-512BD4?style=for-the-badge&logo=blazor&logoColor=white" alt="Blazor Server">
-            <span>Blazor Server</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/MAUI-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="MAUI">
-            <span>MAUI</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/ASP.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="ASP.NET">
-            <span>ASP.NET</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/ASP.NET_Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="ASP.NET Core">
-            <span>ASP.NET Core</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/ASP.NET_MVC-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="ASP.NET MVC">
-            <span>ASP.NET MVC</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Xamarin-3498DB?style=for-the-badge&logo=xamarin&logoColor=white" alt="Xamarin">
-            <span>Xamarin</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/UiPath-00BFFF?style=for-the-badge&logo=uipath&logoColor=white" alt="UiPath">
-            <span>UiPath</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/UiPath_Orchestrator-00BFFF?style=for-the-badge&logo=uipath&logoColor=white" alt="UiPath Orchestrator">
-            <span>UiPath Orchestrator</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/UiPath_DataServices-00BFFF?style=for-the-badge&logo=uipath&logoColor=white" alt="UiPath DataServices">
-            <span>UiPath DataServices</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white" alt="Java">
-            <span>Java</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Swing-007396?style=for-the-badge&logo=java&logoColor=white" alt="Swing">
-            <span>Swing</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring">
-            <span>Spring</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/JPA-007396?style=for-the-badge&logo=java&logoColor=white" alt="JPA">
-            <span>JPA</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-            <span>Python</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Python_RPA-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python RPA">
-            <span>Python RPA</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
-            <span>Flask</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Bottle-008000?style=for-the-badge&logo=python&logoColor=white" alt="Bottle">
-            <span>Bottle</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django">
-            <span>Django</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
-            <span>JavaScript</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js">
-            <span>Node.js</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
-            <span>TypeScript</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular">
-            <span>Angular</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
-            <span>PostgreSQL</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
-            <span>MySQL</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white" alt="SQL Server">
-            <span>SQL Server</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML">
-            <span>HTML</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS">
-            <span>CSS</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/XAML-0C54C2?style=for-the-badge&logo=xaml&logoColor=white" alt="XAML">
-            <span>XAML</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white" alt="JSON">
-            <span>JSON</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/XML-00599C?style=for-the-badge&logo=xml&logoColor=white" alt="XML">
-            <span>XML</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/YAML-000000?style=for-the-badge&logo=yaml&logoColor=white" alt="YAML">
-            <span>YAML</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/RAZOR-512BD4?style=for-the-badge&logo=razor&logoColor=white" alt="RAZOR">
-            <span>RAZOR</span>
-        </div>
-        <div class="tech-item">
-            <img src="https://img.shields.io/badge/XHTML-1660A7?style=for-the-badge&logo=xhtml&logoColor=white" alt="XHTML">
-            <span>XHTML</span>
-        </div>
+
+        @if (Categories == null)
+        {
+            <div class="loading-progress">
+                <circle cx="50%" cy="50%" r="40%"></circle>
+                <circle cx="50%" cy="50%" r="40%"></circle>
+            </div>
+        }
+        else
+        {
+            <div class="accordion custom-accordion" id="techAccordion">
+                @foreach (var category in Categories)
+                {
+                    <div class="accordion-item mb-3 shadow-sm rounded overflow-hidden">
+                        <h2 class="accordion-header" id="@($"heading-{category.Id}")">
+                            <button class="accordion-button @(category.Id == Categories.First().Id ? "" : "collapsed")"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="@($"#collapse-{category.Id}")"
+                                    aria-expanded="@(category.Id == Categories.First().Id ? "true" : "false")"
+                                    aria-controls="@($"collapse-{category.Id}")">
+                                <i class="@category.IconClass me-3 fa-lg"></i>
+                                @category.Name
+                            </button>
+                        </h2>
+                        <div id="@($"collapse-{category.Id}")"
+                             class="accordion-collapse collapse @(category.Id == Categories.First().Id ? "show" : "")"
+                             aria-labelledby="@($"heading-{category.Id}")"
+                             data-bs-parent="#techAccordion">
+
+                            <div class="accordion-body bg-white">
+                                <div class="row g-4 justify-content-center">
+                                    @foreach (var tech in category.Technologies.Where(t => t.IsActive).OrderBy(t => t.DisplayOrder))
+                                    {
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="tech-item-card h-100 d-flex flex-column">
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <h5 class="m-0">@tech.Name</h5>
+                                                </div>
+
+                                                <div class="mb-3 flex-grow-1">
+                                                    @foreach (var cap in tech.Capabilities.Where(c => c.IsActive))
+                                                    {
+                                                        <span class="badge badge-tech me-1 mb-1 rounded-pill">
+                                                            @cap.Description
+                                                        </span>
+                                                    }
+                                                </div>
+
+                                                <button class="btn btn-outline-custom btn-sm w-100 mt-auto rounded-pill"
+                                                        @onclick="() => FilterProjects(tech.SearchSlug)">
+                                                    Ver Projetos
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
     </div>
 </section>
+
+@code {
+    private List<TechCategoryModel> Categories { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Categories = await PortfolioService.GetTechStackAsync();
+    }
+
+    private void FilterProjects(string tag)
+    {
+        NavManager.NavigateTo($"/projetos?tag={tag}");
+    }
+}
