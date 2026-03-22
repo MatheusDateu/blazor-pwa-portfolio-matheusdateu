@@ -1,9 +1,17 @@
-﻿@inherits LayoutComponentBase
+﻿@using BlazorDeploy.Shared
+@inherits LayoutComponentBase
+
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudPopoverProvider />
 
 <div class="page">
     <main>
-        <div class="top-row px-4 bg-black">
-            <div class="social-links">
+        <div class="top-row px-4 bg-black d-flex justify-content-between align-items-center">
+            <div class="language-zone">
+                <LanguageSelector />
+            </div>
+            <div class="social-links d-flex">
                 <SocialLink Href="https://github.com/MatheusDateu" Icon="fab fa-github" />
                 <SocialLink Href="https://www.linkedin.com/in/matheus-delmondes/" Icon="fab fa-linkedin" />
                 <SocialLink Href="mailto:mdelmondes5@outlook.com" Icon="fas fa-envelope" />
@@ -28,11 +36,6 @@
         align-items: center;
         padding: 20px;
         background-color: #333;
-    }
-
-    .social-links {
-        display: flex;
-        gap: 5px;
     }
 
     .social-link {

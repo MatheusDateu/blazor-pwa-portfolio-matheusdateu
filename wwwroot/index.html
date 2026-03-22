@@ -16,15 +16,117 @@
     <link href="manifest.webmanifest" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+    <!-- Start: Libs -->
+    <!-- Flag Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" />
+    <!-- Animate -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Fonts Google -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- MudBlazor -->
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+    <!-- End: Libs-->
+    <style>
+        /* O body fica limpo para o MudBlazor assumir depois */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Esta classe será a nossa Splash Screen isolada */
+        .loading-splash {
+            background-color: #1a1a27; /* Fundo escuro fixo para o loading */
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* Spinner Moderno Minimalista */
+        .modern-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #594ae2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 24px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            color: #e0e0e0;
+        }
+
+        #blazor-error-ui {
+            background: #2d2d3a;
+            color: #ffffff;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            position: fixed;
+            width: auto;
+            min-width: 300px;
+            max-width: 90%;
+            z-index: 2000;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            display: none; /* Blazor mudará para 'block' quando houver erro */
+            align-items: center;
+            border-left: 4px solid #f44336;
+            font-family: 'Roboto', sans-serif;
+        }
+
+            #blazor-error-ui .reload {
+                margin-left: 15px;
+                color: #594ae2;
+                text-decoration: none;
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 0.85rem;
+            }
+
+                #blazor-error-ui .reload:hover {
+                    text-decoration: underline;
+                }
+
+            #blazor-error-ui .dismiss {
+                cursor: pointer;
+                position: absolute;
+                right: 12px;
+                top: 12px;
+                color: #999;
+                font-size: 14px;
+            }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <svg class="loading-progress">
-            <circle r="40%" cx="50%" cy="50%" />
-            <circle r="40%" cx="50%" cy="50%" />
-        </svg>
-        <div class="loading-progress-text"></div>
+        <div class="loading-splash">
+            <div class="modern-spinner"></div>
+
+            <div class="animate__animated animate__pulse animate__infinite">
+                <span id="loading-text" class="loading-text">Loading Portfolio...</span>
+            </div>
+        </div>
     </div>
 
     <div id="blazor-error-ui">
@@ -38,8 +140,8 @@
     <!-- Bootstrap JS -->
     <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
-    <script>navigator.serviceWorker.register('service-worker.js');</script>
-
+    <script>navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });</script>
+    <!-- Carousel -->
     <script>
         $(document).ready(function () {
             $('.carousel').carousel({
@@ -47,7 +149,7 @@
             });
         });
     </script>
-
+    <!-- Lazy Load -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/17.5.1/lazyload.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -55,6 +157,42 @@
                 elements_selector: ".lazyload"
             });
         });
+    </script>
+    <!-- Blazor -->
+    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+    <!-- Translation -->
+    <script>
+        (function setInitialLanguage() {
+            var culture = window.localStorage.getItem('culture') || 'pt-BR';
+            culture = culture.replace(/"/g, '');
+
+            var loadingText = document.getElementById('loading-text');
+            if (!loadingText) {
+                console.error("Culture not found.");
+                return;
+            };
+
+            var errorUi = document.getElementById('blazor-error-ui');
+
+            console.debug("Culture found: ", culture);
+
+            var translations = {
+                'pt': { load: 'Carregando Portfólio...', error: 'Ocorreu um erro inesperado.', reload: 'Recarregar' },
+                'es': { load: 'Cargando Portfolio...', error: 'Ha ocurrido un error inesperado.', reload: 'Recargar' },
+                'en': { load: 'Loading Portfolio...', error: 'An unhandled error has occurred.', reload: 'Reload' }
+            };
+
+            var lang = culture.split('-')[0]; // 'pt', 'en' or 'es'
+            var t = translations[lang] || translations['en'];
+
+            if (loadingText) loadingText.innerText = t.load;
+
+            if (errorUi) {
+                errorUi.childNodes[0].textContent = t.error + ' ';
+                var reloadBtn = errorUi.querySelector('.reload');
+                if (reloadBtn) reloadBtn.innerText = t.reload;
+            }
+        })();
     </script>
 </body>
 
