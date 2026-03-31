@@ -6,7 +6,7 @@
 <MudMenu Icon="@Icons.Material.Filled.Language" Class="text-white" Direction="Direction.Bottom" OffsetY="true" Dense="true">
     @foreach (var lang in languages)
     {
-        <MudMenuItem OnClick="@(() => ChangeLanguage(lang.CultureCode))">
+        <MudMenuItem OnClick="@(() => ChangeLanguage(lang.CultureCode))" title="Language" Label="Language" >
             <div class="d-flex align-center bg-light py-1">
                 <MudIcon Icon="@lang.Icon" Class="mr-2" /> @lang.Name
             </div>
