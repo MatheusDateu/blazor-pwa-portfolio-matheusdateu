@@ -1,7 +1,9 @@
 ﻿@using BlazorDeploy.Models
 @using BlazorDeploy.Services
+@using Microsoft.Extensions.Localization
 
 @inject IPortfolioService PortfolioService
+@inject IStringLocalizer<BlazorDeploy.Resources.App> Loc
 
 @inherits ComponentBase
 
@@ -10,7 +12,7 @@
     {
         <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
             <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
+                <span class="visually-hidden">@Loc["Lbl_Loading"]...</span>
             </div>
         </div>
     }
@@ -58,7 +60,7 @@
                 </div>
             </div>
 
-            <h3 class="text-center mb-4 fw-bold">Domínio Tecnológico</h3>
+            <h3 class="text-center mb-4 fw-bold">@Loc["Lbl_Proficiency"]</h3>
             <div class="row g-4 mb-5">
                 <div class="col-md-6 col-lg-4 animate-up delay-1">
                     <div class="card h-100 border-start border-4 border-primary shadow-sm card-tech">

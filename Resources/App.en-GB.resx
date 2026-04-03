@@ -147,8 +147,14 @@
   <data name="Lbl_LearnMore" xml:space="preserve">
     <value>Learn more</value>
   </data>
+  <data name="Lbl_Loading" xml:space="preserve">
+    <value>Fetching data</value>
+  </data>
   <data name="Lbl_Portfolio" xml:space="preserve">
     <value>Portfolio</value>
+  </data>
+  <data name="Lbl_Proficiency" xml:space="preserve">
+    <value>Proficiency</value>
   </data>
   <data name="Lbl_Projects" xml:space="preserve">
     <value>Projects</value>
@@ -159,8 +165,14 @@
   <data name="Lbl_Soon" xml:space="preserve">
     <value>Coming soon</value>
   </data>
+  <data name="Lbl_StackAndTools" xml:space="preserve">
+    <value>Stack &amp; Tools</value>
+  </data>
   <data name="Lbl_Technologies" xml:space="preserve">
     <value>Technologies</value>
+  </data>
+  <data name="Lbl_TechnologiesDescription" xml:space="preserve">
+    <value>Technologies in which I am proficient and how I apply them in real-world solutions.</value>
   </data>
   <data name="Lbl_Video" xml:space="preserve">
     <value>Video</value>

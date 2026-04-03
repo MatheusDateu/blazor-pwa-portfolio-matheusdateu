@@ -1,4 +1,5 @@
-﻿using Supabase.Postgrest.Attributes;
+﻿using BlazorDeploy.Shared;
+using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 using System.Globalization;
 
@@ -60,43 +61,29 @@ namespace BlazorDeploy.Models
         public DateTimeOffset UpdatedAt { get; set; }
         #endregion
 
-        #region Methods
-        public string GetTranslated(Dictionary<string, string> field)
-        {
-            var culture = CultureInfo.CurrentCulture.Name;
-
-            var lang = culture.Split('-')[0];
-
-            if (field.ContainsKey(culture)) return field[culture];
-            if (field.ContainsKey(lang)) return field[lang];
-
-            return field.Values.FirstOrDefault() ?? string.Empty;
-        }
-        #endregion
-
         #region Display Properties
-        public string DisplayAboutMeTitle => GetTranslated(AboutMeTitle);
-        public string DisplayAboutMeContent => GetTranslated(AboutMeContent);
-        public string DisplayAboutPortfolioTitle => GetTranslated(AboutPortfolioTitle);
-        public string DisplayAboutPortfolioContent => GetTranslated(AboutPortfolioContent);
-        public string DisplayDeveloperMindsetTitle => GetTranslated(DeveloperMindsetTitle);
-        public string DisplayDeveloperMindsetContent => GetTranslated(DeveloperMindsetContent);
-        public string DisplayTechLeadMindsetTitle => GetTranslated(TechLeadMindsetTitle);
-        public string DisplayTechLeadMindsetContent => GetTranslated(TechLeadMindsetContent);
-        public string DisplayDotnetAndAutomationTitle => GetTranslated(DotnetAndAutomationTitle);
-        public string DisplayDotnetAndAutomationContent => GetTranslated(DotnetAndAutomationContent);
-        public string DisplayPythonAndAutomationTitle => GetTranslated(PythonAndAutomationTitle);
-        public string DisplayPythonAndAutomationContent => GetTranslated(PythonAndAutomationContent);
-        public string DisplayAngularAndReactTitle => GetTranslated(AngularAndReactTitle);
-        public string DisplayAngularAndReactContent => GetTranslated(AngularAndReactContent);
-        public string DisplayJavaAndSpringTitle => GetTranslated(JavaAndSpringTitle);
-        public string DisplayJavaAndSpringContent => GetTranslated(JavaAndSpringContent);
-        public string DisplayInvitationTitle => GetTranslated(InvitationTitle);
-        public string DisplayInvitationContent => GetTranslated(InvitationContent);
-        public string DisplayContactTitle => GetTranslated(ContactTitle);
-        public string DisplayContactContent => GetTranslated(ContactContent);
-        public string DisplayMobileAndMultiplatformTitle => GetTranslated(MobileAndMultiplatformTitle);
-        public string DisplayMobileAndMultiplatformContent => GetTranslated(MobileAndMultiplatformContent);
+        public string DisplayAboutMeTitle => MDTranslator.GetTranslated(AboutMeTitle);
+        public string DisplayAboutMeContent => MDTranslator.GetTranslated(AboutMeContent);
+        public string DisplayAboutPortfolioTitle => MDTranslator.GetTranslated(AboutPortfolioTitle);
+        public string DisplayAboutPortfolioContent => MDTranslator.GetTranslated(AboutPortfolioContent);
+        public string DisplayDeveloperMindsetTitle => MDTranslator.GetTranslated(DeveloperMindsetTitle);
+        public string DisplayDeveloperMindsetContent => MDTranslator.GetTranslated(DeveloperMindsetContent);
+        public string DisplayTechLeadMindsetTitle => MDTranslator.GetTranslated(TechLeadMindsetTitle);
+        public string DisplayTechLeadMindsetContent => MDTranslator.GetTranslated(TechLeadMindsetContent);
+        public string DisplayDotnetAndAutomationTitle => MDTranslator.GetTranslated(DotnetAndAutomationTitle);
+        public string DisplayDotnetAndAutomationContent => MDTranslator.GetTranslated(DotnetAndAutomationContent);
+        public string DisplayPythonAndAutomationTitle => MDTranslator.GetTranslated(PythonAndAutomationTitle);
+        public string DisplayPythonAndAutomationContent => MDTranslator.GetTranslated(PythonAndAutomationContent);
+        public string DisplayAngularAndReactTitle => MDTranslator.GetTranslated(AngularAndReactTitle);
+        public string DisplayAngularAndReactContent => MDTranslator.GetTranslated(AngularAndReactContent);
+        public string DisplayJavaAndSpringTitle => MDTranslator.GetTranslated(JavaAndSpringTitle);
+        public string DisplayJavaAndSpringContent => MDTranslator.GetTranslated(JavaAndSpringContent);
+        public string DisplayInvitationTitle => MDTranslator.GetTranslated(InvitationTitle);
+        public string DisplayInvitationContent => MDTranslator.GetTranslated(InvitationContent);
+        public string DisplayContactTitle => MDTranslator.GetTranslated(ContactTitle);
+        public string DisplayContactContent => MDTranslator.GetTranslated(ContactContent);
+        public string DisplayMobileAndMultiplatformTitle => MDTranslator.GetTranslated(MobileAndMultiplatformTitle);
+        public string DisplayMobileAndMultiplatformContent => MDTranslator.GetTranslated(MobileAndMultiplatformContent);
         #endregion
     }
 }
