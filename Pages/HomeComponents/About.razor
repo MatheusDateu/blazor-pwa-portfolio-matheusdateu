@@ -1,7 +1,9 @@
 ﻿@using BlazorDeploy.Models
 @using BlazorDeploy.Services
+@using Microsoft.Extensions.Localization
 
 @inject IPortfolioService PortfolioService
+@inject IStringLocalizer<BlazorDeploy.Resources.App> Loc
 
 @inherits ComponentBase
 
@@ -10,23 +12,25 @@
     {
         <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
             <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
+                <span class="visually-hidden">@Loc["Lbl_Loading"]...</span>
             </div>
         </div>
     }
     else
     {
-        var about = AboutMatheusDelmondesModels.First();
+        var about = AboutMatheusDelmondesModels.FirstOrDefault();
+
+        if (about is null) return;
 
         <div class="container">
             <div class="text-center mb-5 animate-up">
-                <h2 class="display-5 fw-bold mb-3">@about.AboutMeTitle</h2>
+                <h2 class="display-5 fw-bold mb-3">@about.DisplayAboutMeTitle</h2>
                 <div class="lead text-muted mx-auto" style="max-width: 800px;">
-                    @((MarkupString)about.AboutMeContent)
+                    @((MarkupString)about.DisplayAboutMeContent)
                 </div>
                 <div class="mt-4 p-3 bg-light rounded-3 d-inline-block shadow-sm">
-                    <h5 class="fw-bold mb-2">@about.AboutPortfolioTitle</h5>
-                    <p class="mb-0 small text-secondary">@about.AboutPortfolioContent</p>
+                    <h5 class="fw-bold mb-2">@about.DisplayAboutPortfolioTitle</h5>
+                    <p class="mb-0 small text-secondary">@about.DisplayAboutPortfolioContent</p>
                 </div>
             </div>
 
@@ -37,8 +41,8 @@
                             <div class="icon-box bg-primary-subtle text-primary mb-3">
                                 <i class="bi bi-cpu"></i> 🧠
                             </div>
-                            <h3 class="h4 card-title fw-bold">@about.DeveloperMindsetTitle</h3>
-                            <p class="card-text text-secondary">@about.DeveloperMindsetContent</p>
+                            <h3 class="h4 card-title fw-bold">@about.DisplayDeveloperMindsetTitle</h3>
+                            <p class="card-text text-secondary">@about.DisplayDeveloperMindsetContent</p>
                         </div>
                     </div>
                 </div>
@@ -49,20 +53,20 @@
                                 <i class="bi bi-people"></i>
                                 🚀
                             </div>
-                            <h3 class="h4 card-title fw-bold">@about.TechLeadMindsetTitle</h3>
-                            <p class="card-text text-secondary">@about.TechLeadMindsetContent</p>
+                            <h3 class="h4 card-title fw-bold">@about.DisplayTechLeadMindsetTitle</h3>
+                            <p class="card-text text-secondary">@about.DisplayTechLeadMindsetContent</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <h3 class="text-center mb-4 fw-bold">Domínio Tecnológico</h3>
+            <h3 class="text-center mb-4 fw-bold">@Loc["Lbl_Proficiency"]</h3>
             <div class="row g-4 mb-5">
                 <div class="col-md-6 col-lg-4 animate-up delay-1">
                     <div class="card h-100 border-start border-4 border-primary shadow-sm card-tech">
                         <div class="card-body">
-                            <h4 class="h5 fw-bold text-primary">@about.DotnetAndAutomationTitle</h4>
-                            <p class="small text-secondary mb-0">@about.DotnetAndAutomationContent</p>
+                            <h4 class="h5 fw-bold text-primary">@about.DisplayDotnetAndAutomationTitle</h4>
+                            <p class="small text-secondary mb-0">@about.DisplayDotnetAndAutomationContent</p>
                         </div>
                     </div>
                 </div>
@@ -70,8 +74,8 @@
                 <div class="col-md-6 col-lg-4 animate-up delay-2">
                     <div class="card h-100 border-start border-4 border-warning shadow-sm card-tech">
                         <div class="card-body">
-                            <h4 class="h5 fw-bold text-warning">@about.PythonAndAutomationTitle</h4>
-                            <p class="small text-secondary mb-0">@about.PythonAndAutomationContent</p>
+                            <h4 class="h5 fw-bold text-warning">@about.DisplayPythonAndAutomationTitle</h4>
+                            <p class="small text-secondary mb-0">@about.DisplayPythonAndAutomationContent</p>
                         </div>
                     </div>
                 </div>
@@ -79,8 +83,8 @@
                 <div class="col-md-6 col-lg-4 animate-up delay-3">
                     <div class="card h-100 border-start border-4 border-danger shadow-sm card-tech">
                         <div class="card-body">
-                            <h4 class="h5 fw-bold text-danger">@about.JavaAndSpringTitle</h4>
-                            <p class="small text-secondary mb-0">@about.JavaAndSpringContent</p>
+                            <h4 class="h5 fw-bold text-danger">@about.DisplayJavaAndSpringTitle</h4>
+                            <p class="small text-secondary mb-0">@about.DisplayJavaAndSpringContent</p>
                         </div>
                     </div>
                 </div>
@@ -88,8 +92,8 @@
                 <div class="col-md-6 animate-up delay-4">
                     <div class="card h-100 bg-dark text-white shadow-sm card-tech">
                         <div class="card-body">
-                            <h4 class="h5 fw-bold">@about.AngularAndReactTitle</h4>
-                            <p class="small opacity-75 mb-0">@about.AngularAndReactContent</p>
+                            <h4 class="h5 fw-bold">@about.DisplayAngularAndReactTitle</h4>
+                            <p class="small opacity-75 mb-0">@about.DisplayAngularAndReactContent</p>
                         </div>
                     </div>
                 </div>
@@ -97,20 +101,20 @@
                 <div class="col-md-6 animate-up delay-5">
                     <div class="card h-100 bg-secondary text-white shadow-sm card-tech">
                         <div class="card-body">
-                            <h4 class="h5 fw-bold">@about.MobileAndMultiplatformTitle</h4>
-                            <p class="small opacity-75 mb-0">@about.MobileAndMultiplatformContent</p>
+                            <h4 class="h5 fw-bold">@about.DisplayMobileAndMultiplatformTitle</h4>
+                            <p class="small opacity-75 mb-0">@about.DisplayMobileAndMultiplatformContent</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="cta-box text-center p-5 rounded-4 animate-up delay-3">
-                <h3 class="fw-bold mb-3">@about.InvitationTitle</h3>
-                <p class="mb-4 text-muted mx-auto" style="max-width: 600px;">@about.InvitationContent</p>
+                <h3 class="fw-bold mb-3">@about.DisplayInvitationTitle</h3>
+                <p class="mb-4 text-muted mx-auto" style="max-width: 600px;">@about.DisplayInvitationContent</p>
 
                 <div class="contact-highlight p-3 bg-white rounded-3 shadow-sm d-inline-block">
-                    <h5 class="fw-bold text-primary mb-1">@about.ContactTitle</h5>
-                    <p class="mb-0">@about.ContactContent</p>
+                    <h5 class="fw-bold text-primary mb-1">@about.DisplayContactTitle</h5>
+                    <p class="mb-0">@about.DisplayContactContent</p>
                 </div>
             </div>
         </div>

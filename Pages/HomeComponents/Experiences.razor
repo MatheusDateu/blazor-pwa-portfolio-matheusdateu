@@ -1,13 +1,15 @@
-﻿@inherits ComponentBase
+﻿@using Microsoft.Extensions.Localization
+@inherits ComponentBase
+@inject IStringLocalizer<BlazorDeploy.Resources.App> Loc
 
 <section id="experiencias" class="section">
-    <h2>📈 Experiências</h2>
+    <h2>📈 @Loc["Lbl_Experiences"]</h2>
     <ul class="nav nav-tabs" id="experienceTabs" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="delmondeslabs-tab" data-bs-toggle="tab" data-bs-target="#delmondeslabs" type="button" role="tab" aria-controls="delmondeslabs" aria-selected="true">Delmondes Labs - 06/2018 - Atual</button>
+            <button class="nav-link active" id="delmondeslabs-tab" data-bs-toggle="tab" data-bs-target="#delmondeslabs" type="button" role="tab" aria-controls="delmondeslabs" aria-selected="true">Delmondes CodeLabs - 06/2018 - @Loc["Lbl_Current"]</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link " id="intcom-tab" data-bs-toggle="tab" data-bs-target="#intcom" type="button" role="tab" aria-controls="intcom" aria-selected="true">Intcom - 11/2025 - Atual</button>
+            <button class="nav-link " id="intcom-tab" data-bs-toggle="tab" data-bs-target="#intcom" type="button" role="tab" aria-controls="intcom" aria-selected="true">Intcom - 11/2025 - @Loc["Lbl_Current"]</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link " id="dti-tab" data-bs-toggle="tab" data-bs-target="#dti" type="button" role="tab" aria-controls="dti" aria-selected="true">DTI/IFRR - 08/2025 - 11/2025</button>
@@ -35,20 +37,20 @@
         <div class="tab-pane fade active show" id="delmondeslabs" role="tabpanel" aria-labelledby="delmondeslabs-tab">
             <div class="experience">
                 <h3>Delmondes Labs</h3>
-                <p><strong>Período:</strong> Junho de 2018 - Atual</p>
+                <p><strong>Período:</strong> Junho de 2018 - @Loc["Lbl_Current"]</p>
                 <p><strong>Cargo:</strong> Prestação de Serviços em TI</p>
                 <p><strong>Contribuições:</strong></p>
                 <ul>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
                 </ul>
                 <p><strong>Destaques:</strong></p>
                 <ul>
-                    <li>Projeto X: Em breve... <a href="link-projeto-x">Veja mais</a></li>
-                    <li>Projeto Y: Em breve... <a href="link-projeto-y">Veja mais</a></li>
-                    <li>Projeto Z: Em breve... <a href="link-projeto-z">Veja mais</a></li>
+                    <li>Projeto X: @Loc["Lbl_Soon"]... <a href="link-projeto-x">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto Y: @Loc["Lbl_Soon"]... <a href="link-projeto-y">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto Z: @Loc["Lbl_Soon"]... <a href="link-projeto-z">@Loc["Lbl_SeeMore"]</a></li>
 
                 </ul>
             </div>
@@ -57,20 +59,20 @@
         <div class="tab-pane fade" id="intcom" role="tabpanel" aria-labelledby="intcom-tab">
             <div class="experience">
                 <h3>Intcom</h3>
-                <p><strong>Período:</strong> Junho de 2018 - Atual</p>
+                <p><strong>Período:</strong> Junho de 2018 - @Loc["Lbl_Current"]</p>
                 <p><strong>Cargo:</strong> Prestação de Serviços em TI</p>
                 <p><strong>Contribuições:</strong></p>
                 <ul>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
                 </ul>
                 <p><strong>Destaques:</strong></p>
                 <ul>
-                    <li>Projeto X: Em breve... <a href="link-projeto-x">Veja mais</a></li>
-                    <li>Projeto Y: Em breve... <a href="link-projeto-y">Veja mais</a></li>
-                    <li>Projeto Z: Em breve... <a href="link-projeto-z">Veja mais</a></li>
+                    <li>Projeto X: @Loc["Lbl_Soon"]... <a href="link-projeto-x">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto Y: @Loc["Lbl_Soon"]... <a href="link-projeto-y">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto Z: @Loc["Lbl_Soon"]... <a href="link-projeto-z">@Loc["Lbl_SeeMore"]</a></li>
 
                 </ul>
             </div>
@@ -78,20 +80,20 @@
         <div class="tab-pane fade" id="dti" role="tabpanel" aria-labelledby="dti-tab">
             <div class="experience">
                 <h3>Departamento de TI do IFRR</h3>
-                <p><strong>Período:</strong> Junho de 2018 - Atual</p>
+                <p><strong>Período:</strong> Junho de 2018 - @Loc["Lbl_Current"]</p>
                 <p><strong>Cargo:</strong> Prestação de Serviços em TI</p>
                 <p><strong>Contribuições:</strong></p>
                 <ul>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
                 </ul>
                 <p><strong>Destaques:</strong></p>
                 <ul>
-                    <li>Projeto X: Em breve... <a href="link-projeto-x">Veja mais</a></li>
-                    <li>Projeto Y: Em breve... <a href="link-projeto-y">Veja mais</a></li>
-                    <li>Projeto Z: Em breve... <a href="link-projeto-z">Veja mais</a></li>
+                    <li>Projeto X: @Loc["Lbl_Soon"]... <a href="link-projeto-x">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto Y: @Loc["Lbl_Soon"]... <a href="link-projeto-y">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto Z: @Loc["Lbl_Soon"]... <a href="link-projeto-z">@Loc["Lbl_SeeMore"]</a></li>
 
                 </ul>
             </div>
@@ -99,20 +101,20 @@
         <div class="tab-pane fade" id="vanaciprime" role="tabpanel" aria-labelledby="vanaciprime-tab">
             <div class="experience">
                 <h3>Vanaci Prime</h3>
-                <p><strong>Período:</strong> Junho de 2018 - Atual</p>
+                <p><strong>Período:</strong> Junho de 2018 - @Loc["Lbl_Current"]</p>
                 <p><strong>Cargo:</strong> Prestação de Serviços em TI</p>
                 <p><strong>Contribuições:</strong></p>
                 <ul>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
                 </ul>
                 <p><strong>Destaques:</strong></p>
                 <ul>
-                    <li>Projeto X: Em breve... <a href="link-projeto-x">Veja mais</a></li>
-                    <li>Projeto Y: Em breve... <a href="link-projeto-y">Veja mais</a></li>
-                    <li>Projeto Z: Em breve... <a href="link-projeto-z">Veja mais</a></li>
+                    <li>Projeto X: @Loc["Lbl_Soon"]... <a href="link-projeto-x">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto Y: @Loc["Lbl_Soon"]... <a href="link-projeto-y">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto Z: @Loc["Lbl_Soon"]... <a href="link-projeto-z">@Loc["Lbl_SeeMore"]</a></li>
 
                 </ul>
             </div>
@@ -120,20 +122,20 @@
         <div class="tab-pane fade" id="hypeone" role="tabpanel" aria-labelledby="hypeone-tab">
             <div class="experience">
                 <h3>HypeOne</h3>
-                <p><strong>Período:</strong> Junho de 2018 - Atual</p>
+                <p><strong>Período:</strong> Junho de 2018 - @Loc["Lbl_Current"]</p>
                 <p><strong>Cargo:</strong> Prestação de Serviços em TI</p>
                 <p><strong>Contribuições:</strong></p>
                 <ul>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
-                    <li>Em breve...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
+                    <li>@Loc["Lbl_Soon"]...</li>
                 </ul>
                 <p><strong>Destaques:</strong></p>
                 <ul>
-                    <li>Projeto X: Em breve... <a href="link-projeto-x">Veja mais</a></li>
-                    <li>Projeto Y: Em breve... <a href="link-projeto-y">Veja mais</a></li>
-                    <li>Projeto Z: Em breve... <a href="link-projeto-z">Veja mais</a></li>
+                    <li>Projeto X: @Loc["Lbl_Soon"]... <a href="link-projeto-x">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto Y: @Loc["Lbl_Soon"]... <a href="link-projeto-y">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto Z: @Loc["Lbl_Soon"]... <a href="link-projeto-z">@Loc["Lbl_SeeMore"]</a></li>
 
                 </ul>
             </div>
@@ -141,7 +143,7 @@
         <div class="tab-pane fade" id="sonda" role="tabpanel" aria-labelledby="sonda-tab">
             <div class="experience">
                 <h3>Sonda</h3>
-                <p><strong>Período:</strong> Janeiro 2023 - Atual</p>
+                <p><strong>Período:</strong> Janeiro 2023 - @Loc["Lbl_Current"]</p>
                 <p><strong>Cargo:</strong> Engenheiro de Software</p>
                 <p><strong>Contribuições:</strong></p>
                 <ul>
@@ -152,10 +154,10 @@
                 </ul>
                 <p><strong>Destaques:</strong></p>
                 <ul>
-                    <li>Projeto CCN: Sistema de Cadastro de Casos de Negócios <a href="link-projeto-x">Veja mais</a></li>
-                    <li>Projeto AUTOMAJUS: Projeto vencedor do INOVAJURR 2023 <a href="link-projeto-y">Veja mais</a></li>
-                    <li>Projeto Bot Mestre VCV: Automação Central da "Vara de Crimes Contra Vulneráveis" <a href="link-projeto-y">Veja mais</a></li>
-                    <li>Projeto Bot Mestre SUVIJ: Automação Central da "Secretaria Unificada da Infância e Juventude" <a href="link-projeto-y">Veja mais</a></li>
+                    <li>Projeto CCN: Sistema de Cadastro de Casos de Negócios <a href="link-projeto-x">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto AUTOMAJUS: Projeto vencedor do INOVAJURR 2023 <a href="link-projeto-y">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto Bot Mestre VCV: Automação Central da "Vara de Crimes Contra Vulneráveis" <a href="link-projeto-y">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto Bot Mestre SUVIJ: Automação Central da "Secretaria Unificada da Infância e Juventude" <a href="link-projeto-y">@Loc["Lbl_SeeMore"]</a></li>
 
                 </ul>
             </div>
@@ -174,8 +176,8 @@
                 </ul>
                 <p><strong>Destaques:</strong></p>
                 <ul>
-                    <li>Projeto A: Descrição breve do projeto <a href="link-projeto-a">Veja mais</a></li>
-                    <li>Projeto B: Descrição breve do projeto <a href="link-projeto-b">Veja mais</a></li>
+                    <li>Projeto A: Descrição breve do projeto <a href="link-projeto-a">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto B: Descrição breve do projeto <a href="link-projeto-b">@Loc["Lbl_SeeMore"]</a></li>
                 </ul>
             </div>
         </div>
@@ -193,8 +195,8 @@
                 </ul>
                 <p><strong>Destaques:</strong></p>
                 <ul>
-                    <li>Projeto C: Descrição breve do projeto <a href="link-projeto-c">Veja mais</a></li>
-                    <li>Projeto D: Descrição breve do projeto <a href="link-projeto-d">Veja mais</a></li>
+                    <li>Projeto C: Descrição breve do projeto <a href="link-projeto-c">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto D: Descrição breve do projeto <a href="link-projeto-d">@Loc["Lbl_SeeMore"]</a></li>
                 </ul>
             </div>
         </div>
@@ -212,8 +214,8 @@
                 </ul>
                 <p><strong>Destaques:</strong></p>
                 <ul>
-                    <li>Projeto E: Descrição breve do projeto <a href="link-projeto-e">Veja mais</a></li>
-                    <li>Projeto F: Descrição breve do projeto <a href="link-projeto-f">Veja mais</a></li>
+                    <li>Projeto E: Descrição breve do projeto <a href="link-projeto-e">@Loc["Lbl_SeeMore"]</a></li>
+                    <li>Projeto F: Descrição breve do projeto <a href="link-projeto-f">@Loc["Lbl_SeeMore"]</a></li>
                 </ul>
             </div>
         </div>
