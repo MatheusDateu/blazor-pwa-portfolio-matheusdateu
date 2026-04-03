@@ -1,0 +1,43 @@
+﻿@using System.Globalization
+@using Blazored.LocalStorage
+@inject ILocalStorageService LocalStorage
+@inject NavigationManager NavManager
+
+<MudMenu Icon="@Icons.Material.Filled.Language" Class="text-white" Direction="Direction.Bottom" OffsetY="true" Dense="true">
+    @foreach (var lang in languages)
+    {
+        <MudMenuItem OnClick="@(() => ChangeLanguage(lang.CultureCode))" title="Language" Label="Language" >
+            <div class="d-flex align-center bg-light py-1">
+                <MudIcon Icon="@lang.Icon" Class="mr-2" /> @lang.Name
+            </div>
+        </MudMenuItem>
+    }
+</MudMenu>
+
+@code {
+    HashSet<Language> languages = new();
+
+    protected override void OnInitialized()
+    {
+        languages.Add(new Language(Name: "🇧🇷 Português", Icon: "fi fi-br", CultureCode: "pt-BR"));
+        languages.Add(new Language(Name: "🇺🇸 English", Icon: "fi fi-us", CultureCode: "en-US"));
+        languages.Add(new Language(Name: "🇺k English", Icon: "fi fi-gb", CultureCode: "en-UK"));
+        languages.Add(new Language(Name: "🇪🇸 Español", Icon: "fi fi-es", CultureCode: "es-ES"));
+    }
+
+    private async Task ChangeLanguage(string cultureCode)
+    {
+        var culture = new CultureInfo(cultureCode);
+
+        await LocalStorage.SetItemAsync("culture", cultureCode);
+
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+        NavManager.NavigateTo(NavManager.Uri, forceLoad: true);
+    }
+
+    record Language(string Name,string Icon, string CultureCode);
+
+    }
+}

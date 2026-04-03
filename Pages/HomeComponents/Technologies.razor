@@ -2,15 +2,17 @@
 @using BlazorDeploy.Services
 @inject IPortfolioService PortfolioService
 @inject NavigationManager NavManager
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<BlazorDeploy.Resources.App> Loc
 
 <section id="tecnologias" class="section">
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="fw-bold" style="color: #333;">
-                <i class="fa-solid fa-code me-2"></i>Stack & Ferramentas
+                <i class="fa-solid fa-code me-2"></i>@Loc["Lbl_StackAndTools"]
             </h2>
             <p class="text-muted">
-                Tecnologias que domino e como as aplico em soluções reais.
+                @Loc["Lbl_TechnologiesDescription"]
             </p>
         </div>
 
@@ -64,7 +66,7 @@
 
                                                 <button class="btn btn-outline-custom btn-sm w-100 mt-auto rounded-pill"
                                                         @onclick="() => FilterProjects(tech.SearchSlug)">
-                                                    Ver Projetos
+                                                    @Loc["Lbl_SeeMore"]
                                                 </button>
                                             </div>
                                         </div>
