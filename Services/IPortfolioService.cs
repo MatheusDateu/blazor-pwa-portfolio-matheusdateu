@@ -10,23 +10,29 @@ namespace BlazorDeploy.Services
         /// <summary>
         /// Retrieves all projects ordered by creation date (newest first).
         /// </summary>
-        Task<List<PortfolioProjectModel>> GetProjectsAsync();
+        Task<HashSet<PortfolioProjectModel>> GetProjectsAsync();
 
         /// <summary>
         /// Retrieves all available project categories.
         /// </summary>
-        Task<List<ProjectCategoryModel>> GetCategoriesAsync();
+        Task<HashSet<ProjectCategoryModel>> GetCategoriesAsync();
         
         /// <summary>
         /// Retrieves information about Matheus Delmondes.
         /// </summary>
         /// <returns></returns>
-        Task<List<AboutMatheusDelmondesModel>> GetAboutMatheusDelmondesAsync();
+        Task<HashSet<AboutMatheusDelmondesModel>> GetAboutMatheusDelmondesAsync();
 
         /// <summary>
         /// Retrieves the technology stack categories and their associated technologies.
         /// </summary>
         /// <returns></returns>
-        Task<List<TechCategoryModel>> GetTechStackAsync();
+        Task<HashSet<TechCategoryModel>> GetTechStackAsync();
+
+        /// <summary>
+        /// Retrives the experiences of Matheus Delmondes, ordered by period start date (newest first).
+        /// </summary>
+        /// <returns></returns>
+        Task<HashSet<ExperienceModel>> GetExperiencesAsync();
     }
 }

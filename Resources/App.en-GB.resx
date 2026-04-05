@@ -126,6 +126,9 @@
   <data name="Lbl_About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="Lbl_Contributions" xml:space="preserve">
+    <value>Contributions</value>
+  </data>
   <data name="Lbl_Current" xml:space="preserve">
     <value>Current</value>
   </data>
@@ -141,6 +144,9 @@
   <data name="Lbl_Feature" xml:space="preserve">
     <value>Feature</value>
   </data>
+  <data name="Lbl_Highlights" xml:space="preserve">
+    <value>Highlights</value>
+  </data>
   <data name="Lbl_Images" xml:space="preserve">
     <value>Images</value>
   </data>
@@ -150,6 +156,9 @@
   <data name="Lbl_Loading" xml:space="preserve">
     <value>Fetching data</value>
   </data>
+  <data name="Lbl_Period" xml:space="preserve">
+    <value>Period</value>
+  </data>
   <data name="Lbl_Portfolio" xml:space="preserve">
     <value>Portfolio</value>
   </data>
@@ -158,6 +167,9 @@
   </data>
   <data name="Lbl_Projects" xml:space="preserve">
     <value>Projects</value>
+  </data>
+  <data name="Lbl_Role" xml:space="preserve">
+    <value>Role</value>
   </data>
   <data name="Lbl_SeeMore" xml:space="preserve">
     <value>See more</value>

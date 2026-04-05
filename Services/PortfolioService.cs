@@ -15,7 +15,7 @@ namespace BlazorDeploy.Services
             _supabaseClient = supabaseClient;
         }
 
-        public async Task<List<ProjectCategoryModel>> GetCategoriesAsync()
+        public async Task<HashSet<ProjectCategoryModel>> GetCategoriesAsync()
         {
             try
             {
@@ -23,16 +23,16 @@ namespace BlazorDeploy.Services
                     .From<ProjectCategoryModel>()
                     .Order(x => x.Id, Supabase.Postgrest.Constants.Ordering.Ascending)
                     .Get();
-                return response.Models;
+                return response.Models.ToHashSet();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[Error] Failed to fetch categories: {ex.Message}");
-                return new List<ProjectCategoryModel>();
+                return new HashSet<ProjectCategoryModel>();
             }
         }
 
-        public async Task<List<PortfolioProjectModel>> GetProjectsAsync()
+        public async Task<HashSet<PortfolioProjectModel>> GetProjectsAsync()
         {
             try
             {
@@ -40,16 +40,16 @@ namespace BlazorDeploy.Services
                 .From<PortfolioProjectModel>()
                 .Order(x => x.Id, Supabase.Postgrest.Constants.Ordering.Ascending)
                 .Get();
-                return response.Models;
+                return response.Models.ToHashSet();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[Error] Failed to initialise project list: {ex.Message}");
-                return new List<PortfolioProjectModel>();
+                return new HashSet<PortfolioProjectModel>();
             }
         }
 
-        public async Task<List<AboutMatheusDelmondesModel>> GetAboutMatheusDelmondesAsync()
+        public async Task<HashSet<AboutMatheusDelmondesModel>> GetAboutMatheusDelmondesAsync()
         {
             try
             {
@@ -57,16 +57,16 @@ namespace BlazorDeploy.Services
                     .From<AboutMatheusDelmondesModel>()
                     .Order(x => x.Id, Supabase.Postgrest.Constants.Ordering.Ascending)
                     .Get();
-                return response.Models;
+                return response.Models.ToHashSet();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[Error] Failed to fetch about Matheus Delmondes: {ex.Message}");
-                return new List<AboutMatheusDelmondesModel>();
+                return new HashSet<AboutMatheusDelmondesModel>();
             }
         }
 
-        public async Task<List<TechCategoryModel>> GetTechStackAsync()
+        public async Task<HashSet<TechCategoryModel>> GetTechStackAsync()
         {
             try
             {
@@ -74,12 +74,30 @@ namespace BlazorDeploy.Services
                     .From<TechCategoryModel>()
                     .Order("display_order", Supabase.Postgrest.Constants.Ordering.Ascending)
                     .Get();
-                return response.Models.Where(x => x.IsActive).ToList();
+                return response.Models.Where(x => x.IsActive).ToHashSet();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[Error] Failed to fetch Tech Stack: {ex.Message}");
-                return new List<TechCategoryModel>();
+                return new HashSet<TechCategoryModel>();
+            }
+        }
+
+        public async Task<HashSet<ExperienceModel>> GetExperiencesAsync()
+        {
+            try
+            {
+                var response = await _supabaseClient
+                    .From<ExperienceModel>()
+                    .Order("display_order", Supabase.Postgrest.Constants.Ordering.Ascending)
+                    .Get();
+
+                return response.Models.ToHashSet();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Error] Failed to fetch experiences: {ex.Message}");
+                return new HashSet<ExperienceModel>();
             }
         }
     }

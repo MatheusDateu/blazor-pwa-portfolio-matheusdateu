@@ -45,7 +45,7 @@ else
                     <div class="carousel-inner">
                         @foreach (var projeto in ProjectsByCategory[categoria])
                         {
-                            <div class="carousel-item @(ProjectsByCategory[categoria].IndexOf(projeto) == 0 ? "active" : "")">
+                            <div class="carousel-item @(ProjectsByCategory[categoria].ToList().IndexOf(projeto) == 0 ? "active" : "")">
                                 <div class="project-card mx-auto">
                                     <h5 title="@projeto.Name">@projeto.Name</h5>
                                     <p title="@projeto.Synopsis">@projeto.Synopsis</p>
@@ -53,7 +53,7 @@ else
                                     <button class="btn btn-primary" @onclick="() => ModService.Show(projeto)">@Loc["Lbl_LearnMore"]</button>
                                 </div>
                                 <div class="py-2 text-center">
-                                    <span class="text-black">@(ProjectsByCategory[categoria].IndexOf(projeto) + 1)/@ProjectsByCategory[categoria].Count</span>
+                                    <span class="text-black">@(ProjectsByCategory[categoria].ToList().IndexOf(projeto) + 1)/@ProjectsByCategory[categoria].Count</span>
                                 </div>
                             </div>
                         }
@@ -79,10 +79,10 @@ else
 </section>
 
 @code {
-    private List<PortfolioProjectModel> Projetos;
-    private List<ProjectCategoryModel> Categories;
+    private HashSet<PortfolioProjectModel> Projetos;
+    private HashSet<ProjectCategoryModel> Categories;
 
-    private Dictionary<string, List<PortfolioProjectModel>> ProjectsByCategory;
+    private Dictionary<string, HashSet<PortfolioProjectModel>> ProjectsByCategory;
 
     private string categoriaAtiva;
 
@@ -106,12 +106,11 @@ else
 
     private void GroupProjectsByCategory()
     {
-        ProjectsByCategory = new Dictionary<string, List<PortfolioProjectModel>>();
+        ProjectsByCategory = new Dictionary<string, HashSet<PortfolioProjectModel>>();
 
         foreach (var cat in Categories)
         {
-            var projectsInCat = Projetos.Where(p => p.CategoryId == cat.Id).ToList();
-
+            var projectsInCat = Projetos.Where(p => p.CategoryId == cat.Id).ToHashSet();
             if (projectsInCat.Any())
             {
                 ProjectsByCategory.Add(cat.Name, projectsInCat);
