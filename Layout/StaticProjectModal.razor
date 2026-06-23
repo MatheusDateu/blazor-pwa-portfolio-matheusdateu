@@ -1,6 +1,8 @@
 ﻿@using BlazorDeploy.Models
 @using BlazorDeploy.Services
+@using Microsoft.Extensions.Localization
 @inject ModalService ModalService
+@inject IStringLocalizer<BlazorDeploy.Resources.App> Loc
 
 @if (isVisible && Project != null)
 {
@@ -9,7 +11,7 @@
             <div class="modal-content shadow-lg">
                 <div class="modal-header bg-black text-white">
                     <h5 class="modal-title">@Project.Name</h5>
-                    <button type="button" class="btn-close btn-close-white" @onclick="CloseModal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" @onclick="CloseModal" aria-label="@Loc["Btn_Close"]"></button>
                 </div>
 
                 <div class="modal-body">
@@ -18,7 +20,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDesc" aria-expanded="true">
-                                    📄 Descrição
+                                    📄 @Loc["Lbl_Description"]
                                 </button>
                             </h2>
                             <div id="collapseDesc" class="accordion-collapse collapse show" data-bs-parent="#accordionGlobalModal">
@@ -31,7 +33,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImg" aria-expanded="false">
-                                    📷 Imagens
+                                    📷 @Loc["Lbl_Images"]
                                 </button>
                             </h2>
                             <div id="collapseImg" class="accordion-collapse collapse" data-bs-parent="#accordionGlobalModal">
@@ -49,7 +51,7 @@
                                             }
                                             else
                                             {
-                                                <p class="text-center text-muted p-3">Sem imagens.</p>
+                                                <p class="text-center text-muted p-3">@Loc["Msg_NoImages"].</p>
                                             }
                                         </div>
                                         @if (Project.ImagesUrl?.Count > 1)
@@ -71,7 +73,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVid">
-                                        🎥 Vídeo
+                                        🎥 @Loc["Lbl_Video"]
                                     </button>
                                 </h2>
                                 <div id="collapseVid" class="accordion-collapse collapse" data-bs-parent="#accordionGlobalModal">
@@ -87,7 +89,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" @onclick="CloseModal">Fechar</button>
+                    <button type="button" class="btn btn-secondary" @onclick="CloseModal">@Loc["Btn_Close"]</button>
                 </div>
             </div>
         </div>
@@ -96,7 +98,7 @@
 
 @code {
     private bool isVisible = false;
-    private PortfolioProject? Project;
+    private PortfolioProjectModel? Project;
 
     protected override void OnInitialized()
     {
@@ -105,7 +107,7 @@
         ModalService.OnClose += CloseModal;
     }
 
-    private void ShowModal(PortfolioProject project)
+    private void ShowModal(PortfolioProjectModel project)
     {
         Project = project;
         isVisible = true;

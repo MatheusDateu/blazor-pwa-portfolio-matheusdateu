@@ -15,37 +15,89 @@ namespace BlazorDeploy.Services
             _supabaseClient = supabaseClient;
         }
 
-        public async Task<List<ProjectCategory>> GetCategoriesAsync()
+        public async Task<HashSet<ProjectCategoryModel>> GetCategoriesAsync()
         {
             try
             {
                 var response = await _supabaseClient
-                    .From<ProjectCategory>()
+                    .From<ProjectCategoryModel>()
                     .Order(x => x.Id, Supabase.Postgrest.Constants.Ordering.Ascending)
                     .Get();
-                return response.Models;
+                return response.Models.ToHashSet();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[Error] Failed to fetch categories: {ex.Message}");
-                return new List<ProjectCategory>();
+                return new HashSet<ProjectCategoryModel>();
             }
         }
 
-        public async Task<List<PortfolioProject>> GetProjectsAsync()
+        public async Task<HashSet<PortfolioProjectModel>> GetProjectsAsync()
         {
             try
             {
                 var response = await _supabaseClient
-                .From<PortfolioProject>()
+                .From<PortfolioProjectModel>()
                 .Order(x => x.Id, Supabase.Postgrest.Constants.Ordering.Ascending)
                 .Get();
-                return response.Models;
+                return response.Models.ToHashSet();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[Error] Failed to initialise project list: {ex.Message}");
-                return new List<PortfolioProject>();
+                return new HashSet<PortfolioProjectModel>();
+            }
+        }
+
+        public async Task<HashSet<AboutMatheusDelmondesModel>> GetAboutMatheusDelmondesAsync()
+        {
+            try
+            {
+                var response = await _supabaseClient
+                    .From<AboutMatheusDelmondesModel>()
+                    .Order(x => x.Id, Supabase.Postgrest.Constants.Ordering.Ascending)
+                    .Get();
+                return response.Models.ToHashSet();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Error] Failed to fetch about Matheus Delmondes: {ex.Message}");
+                return new HashSet<AboutMatheusDelmondesModel>();
+            }
+        }
+
+        public async Task<HashSet<TechCategoryModel>> GetTechStackAsync()
+        {
+            try
+            {
+                var response = await _supabaseClient
+                    .From<TechCategoryModel>()
+                    .Order("display_order", Supabase.Postgrest.Constants.Ordering.Ascending)
+                    .Get();
+                return response.Models.Where(x => x.IsActive).ToHashSet();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Error] Failed to fetch Tech Stack: {ex.Message}");
+                return new HashSet<TechCategoryModel>();
+            }
+        }
+
+        public async Task<HashSet<ExperienceModel>> GetExperiencesAsync()
+        {
+            try
+            {
+                var response = await _supabaseClient
+                    .From<ExperienceModel>()
+                    .Order("display_order", Supabase.Postgrest.Constants.Ordering.Ascending)
+                    .Get();
+
+                return response.Models.ToHashSet();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Error] Failed to fetch experiences: {ex.Message}");
+                return new HashSet<ExperienceModel>();
             }
         }
     }

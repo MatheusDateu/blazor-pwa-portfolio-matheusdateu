@@ -4,7 +4,7 @@ using Supabase.Postgrest.Models;
 namespace BlazorDeploy.Models
 {
     [Table("p0rt1f0l10-0002-_category")]
-    public class ProjectCategory : BaseModel
+    public class ProjectCategoryModel : BaseModel
     {
         [PrimaryKey("id", false)]
         public int Id { get; set; }

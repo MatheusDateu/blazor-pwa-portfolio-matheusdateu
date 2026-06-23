@@ -1,0 +1,96 @@
+﻿@using BlazorDeploy.Models
+@using BlazorDeploy.Services
+@inject IPortfolioService PortfolioService
+@inject NavigationManager NavManager
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<BlazorDeploy.Resources.App> Loc
+
+<section id="tecnologias" class="section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold" style="color: #333;">
+                <i class="fa-solid fa-code me-2"></i>@Loc["Lbl_StackAndTools"]
+            </h2>
+            <p class="text-muted">
+                @Loc["Lbl_TechnologiesDescription"]
+            </p>
+        </div>
+
+        @if (Categories == null)
+        {
+            <div class="loading-progress">
+                <circle cx="50%" cy="50%" r="40%"></circle>
+                <circle cx="50%" cy="50%" r="40%"></circle>
+            </div>
+        }
+        else
+        {
+            <div class="accordion custom-accordion" id="techAccordion">
+                @foreach (var category in Categories)
+                {
+                    <div class="accordion-item mb-3 shadow-sm rounded overflow-hidden">
+                        <h2 class="accordion-header" id="@($"heading-{category.Id}")">
+                            <button class="accordion-button @(category.Id == Categories.First().Id ? "" : "collapsed")"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="@($"#collapse-{category.Id}")"
+                                    aria-expanded="@(category.Id == Categories.First().Id ? "true" : "false")"
+                                    aria-controls="@($"collapse-{category.Id}")">
+                                <i class="@category.IconClass me-3 fa-lg"></i>
+                                @category.Name
+                            </button>
+                        </h2>
+                        <div id="@($"collapse-{category.Id}")"
+                             class="accordion-collapse collapse @(category.Id == Categories.First().Id ? "show" : "")"
+                             aria-labelledby="@($"heading-{category.Id}")"
+                             data-bs-parent="#techAccordion">
+
+                            <div class="accordion-body bg-white">
+                                <div class="row g-4 justify-content-center">
+                                    @foreach (var tech in category.Technologies.Where(t => t.IsActive).OrderBy(t => t.DisplayOrder))
+                                    {
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="tech-item-card h-100 d-flex flex-column">
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <h5 class="m-0">@tech.Name</h5>
+                                                </div>
+
+                                                <div class="mb-3 flex-grow-1">
+                                                    @foreach (var cap in tech.Capabilities.Where(c => c.IsActive))
+                                                    {
+                                                        <span class="badge badge-tech me-1 mb-1 rounded-pill">
+                                                            @cap.Description
+                                                        </span>
+                                                    }
+                                                </div>
+
+                                                <button class="btn btn-outline-custom btn-sm w-100 mt-auto rounded-pill"
+                                                        @onclick="() => FilterProjects(tech.SearchSlug)">
+                                                    @Loc["Lbl_SeeMore"]
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+@code {
+    private HashSet<TechCategoryModel> Categories { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Categories = await PortfolioService.GetTechStackAsync();
+    }
+
+    private void FilterProjects(string tag)
+    {
+        NavManager.NavigateTo($"/projetos?tag={tag}");
+    }
+}

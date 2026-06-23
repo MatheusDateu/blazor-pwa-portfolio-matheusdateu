@@ -33,7 +33,7 @@ namespace BlazorDeploy.Models
         public Dictionary<string, List<string>> ContributionsDict { get; set; } = new();
 
         [Column("personal_notes")]
-        public Dictionary<string, string>? PersonalNotesDict { get; set; } = new();
+        public Dictionary<string, string> PersonalNotesDict { get; set; } = new();
 
         [Column("highlights")]
         public Dictionary<string, List<ExperienceHighlight>> HighlightsDict { get; set; } = new();

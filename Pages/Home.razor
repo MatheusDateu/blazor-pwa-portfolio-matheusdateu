@@ -1,29 +1,31 @@
 @page "/"
 @using BlazorDeploy.Pages.HomeComponents
+@using Microsoft.Extensions.Localization
 @inject IJSRuntime JSRuntime
+@inject IStringLocalizer<BlazorDeploy.Resources.App> Loc
 
-<PageTitle>Sobre Matheus Delmondes</PageTitle>
+<PageTitle>@Loc["Lbl_About"] Matheus Delmondes</PageTitle>
 
 <!-- Navegação -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Portfólio</a>
+        <a class="navbar-brand" href="#">@Loc["Lbl_Portfolio"]</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#sobre">Sobre</a>
+                    <a class="nav-link" href="#sobre">@Loc["Lbl_About"]</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#tecnologias">Tecnologias</a>
+                    <a class="nav-link" href="#tecnologias">@Loc["Lbl_Technologies"]</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#experiencias">Experiências</a>
+                    <a class="nav-link" href="#experiencias">@Loc["Lbl_Experiences"]</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#projetos">Projetos</a>
+                    <a class="nav-link" href="#projetos">@Loc["Lbl_Projects"]</a>
                 </li>
             </ul>
         </div>
@@ -35,7 +37,7 @@
 <hr />
 
 <!-- Seção Tecnologias -->
-<Tecnologies />
+<Technologies />
 <hr />
 
 <!-- Seção Experiências -->
