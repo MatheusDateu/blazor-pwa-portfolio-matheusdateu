@@ -1,0 +1,184 @@
+﻿#projetos {
+    background-color: #000000;
+    padding: 80px 0;
+}
+
+/* Painel de Filtros */
+.filter-panel {
+    background-color: #111111;
+    border: 1px solid #222222;
+}
+
+.search-box {
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 30px;
+    padding-left: 10px;
+}
+
+    .search-box input:focus {
+        box-shadow: none;
+        color: #ffffff;
+    }
+
+.custom-select {
+    background-color: #1a1a1a !important;
+    border: 1px solid #333333 !important;
+    border-radius: 30px !important;
+}
+
+    .custom-select:focus {
+        border-color: #1b6ec2 !important;
+        box-shadow: 0 0 0 0.25rem rgba(27, 110, 194, 0.25) !important;
+    }
+
+/* Custom Accordion */
+.custom-project-accordion .accordion-item {
+    background-color: #111111;
+    border: 1px solid #222222 !important;
+}
+
+.custom-project-accordion .accordion-button {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    font-size: 1.1rem;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+}
+
+    .custom-project-accordion .accordion-button:not(.collapsed) {
+        background-color: #1a1a1a !important;
+        border-bottom: 1px solid #222222;
+    }
+
+    .custom-project-accordion .accordion-button::after {
+        filter: invert(1);
+    }
+
+.custom-project-accordion .accordion-body {
+    background-color: #080808;
+}
+
+/* Modern Project Cards */
+.project-modern-card {
+    background-color: #121212;
+    border: 1px solid #222222;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+    .project-modern-card:hover {
+        transform: translateY(-4px);
+        border-color: #1b6ec2;
+        box-shadow: 0 10px 20px rgba(27, 110, 194, 0.15) !important;
+    }
+
+/* Limitador de Linhas para Texto (Line Clamp) */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.section-projects {
+    padding: 80px 0;
+    background: linear-gradient(to bottom, #ffffff, #f8f9fa); /* Gradiente idêntico ao About.razor */
+}
+
+/* Painel de Filtros Integrado */
+.filter-panel {
+    border: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+.search-box, .custom-select {
+    border: 1px solid #dee2e6 !important;
+    background-color: #ffffff !important;
+}
+
+    .search-box input:focus {
+        box-shadow: none;
+        color: #333333;
+    }
+
+/* Accordion de Projetos herdando o estilo do techAccordion */
+.custom-accordion .accordion-item {
+    border: 1px solid rgba(0,0,0,0.125);
+    background-color: transparent;
+}
+
+.custom-accordion .accordion-button {
+    background-color: #fff;
+    color: #333;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: none !important;
+    padding: 1.2rem;
+}
+
+    .custom-accordion .accordion-button:not(.collapsed),
+    .custom-accordion .accordion-button:hover {
+        background-color: #000;
+        color: #fff;
+        border-color: #000;
+    }
+
+        .custom-accordion .accordion-button:not(.collapsed)::after,
+        .custom-accordion .accordion-button:hover::after {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+/* Card de Projetos herdando os efeitos de escala (1.02) do card-tech */
+.card-tech {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #ffffff;
+}
+
+    .card-tech:hover {
+        transform: scale(1.02); /* Escala idêntica aos cards de proficiência */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    }
+
+/* Botão outline herdado de ferramentas */
+.btn-outline-custom {
+    color: #333;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+    .btn-outline-custom:hover {
+        background-color: #1b6ec2;
+        border-color: #1b6ec2;
+        color: #fff;
+    }
+
+/* Limitador de Linhas */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Animações de Entrada (Idênticas ao About.razor) */
+.animate-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.delay-2 {
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
