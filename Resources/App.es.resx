@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Btn_ClearFilter" xml:space="preserve">
-    <value>Limpiar Filtros</value>
-  </data>
   <data name="Btn_Close" xml:space="preserve">
     <value>Cerrar</value>
   </data>
@@ -147,9 +144,6 @@
   <data name="Lbl_Feature" xml:space="preserve">
     <value>Funcionalidad</value>
   </data>
-  <data name="Lbl_FilteredProjectNotFound" xml:space="preserve">
-    <value>Ningún proyecto coincide con los criterios de filtrado aplicados.</value>
-  </data>
   <data name="Lbl_Highlights" xml:space="preserve">
     <value>Destacados</value>
   </data>
@@ -173,9 +167,6 @@
   </data>
   <data name="Lbl_Projects" xml:space="preserve">
     <value>Proyectos</value>
-  </data>
-  <data name="Lbl_ProjectsDescription" xml:space="preserve">
-    <value>Descubre innovación en ingeniería y ecosistemas únicos</value>
   </data>
   <data name="Lbl_Role" xml:space="preserve">
     <value>Rol</value>
@@ -201,10 +192,19 @@
   <data name="Msg_NoImages" xml:space="preserve">
     <value>Sin imágenes</value>
   </data>
+  <data name="Btn_ClearFilter" xml:space="preserve">
+    <value>Limpiar Filtros</value>
+  </data>
+  <data name="Lbl_ProjectsDescription" xml:space="preserve">
+    <value>Descubre innovación en ingeniería y ecosistemas únicos</value>
+  </data>
   <data name="Plh_SearchBar" xml:space="preserve">
     <value>Buscar proyectos por nombre, sinopsis o stack...</value>
   </data>
   <data name="Sel_AllOptions" xml:space="preserve">
     <value>Todas las categorías</value>
+  </data>
+  <data name="Lbl_FilteredProjectNotFound" xml:space="preserve">
+    <value>Ningún proyecto coincide con los criterios de filtrado aplicados.</value>
   </data>
 </root>
