@@ -192,4 +192,19 @@
   <data name="Msg_NoImages" xml:space="preserve">
     <value>No images</value>
   </data>
+  <data name="Btn_ClearFilter" xml:space="preserve">
+    <value>Clear Filter</value>
+  </data>
+  <data name="Lbl_ProjectsDescription" xml:space="preserve">
+    <value>Discover innovation in engineering and unique ecosystems</value>
+  </data>
+  <data name="Plh_SearchBar" xml:space="preserve">
+    <value>Search projects by name, synopsis or stack...</value>
+  </data>
+  <data name="Sel_AllOptions" xml:space="preserve">
+    <value>All categories</value>
+  </data>
+  <data name="Lbl_FilteredProjectNotFound" xml:space="preserve">
+    <value>No project matches the applied filtering criteria.</value>
+  </data>
 </root>

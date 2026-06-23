@@ -192,4 +192,19 @@
   <data name="Msg_NoImages" xml:space="preserve">
     <value>Sin imágenes</value>
   </data>
+  <data name="Btn_ClearFilter" xml:space="preserve">
+    <value>Limpiar Filtros</value>
+  </data>
+  <data name="Lbl_ProjectsDescription" xml:space="preserve">
+    <value>Descubre innovación en ingeniería y ecosistemas únicos</value>
+  </data>
+  <data name="Plh_SearchBar" xml:space="preserve">
+    <value>Buscar proyectos por nombre, sinopsis o stack...</value>
+  </data>
+  <data name="Sel_AllOptions" xml:space="preserve">
+    <value>Todas las categorías</value>
+  </data>
+  <data name="Lbl_FilteredProjectNotFound" xml:space="preserve">
+    <value>Ningún proyecto coincide con los criterios de filtrado aplicados.</value>
+  </data>
 </root>

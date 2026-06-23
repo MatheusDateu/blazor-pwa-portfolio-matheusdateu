@@ -12,8 +12,6 @@ namespace BlazorDeploy.Models
         public string Name { get; set; }
         [Column("synopsis")]
         public string Synopsis { get; set; }
-        [Column("category_id")]
-        public int CategoryId { get; set; }
         [Column("description")]
         public string Description { get; set; }
         [Column("thumbnail_url")]
@@ -28,5 +26,17 @@ namespace BlazorDeploy.Models
         public DateTimeOffset CreatedAt { get; set; }
         [Column("updated_at")]
         public DateTimeOffset UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Retrieves the list of categories linked to this project.
+        /// </summary>
+        [Reference(typeof(ProjectCategoryRelationModel))]
+        public List<ProjectCategoryRelationModel> ProjectCategories { get; set; } = new();
+
+        /// <summary>
+        /// Retrieves the list of technical capabilities utilised in this project.
+        /// </summary>
+        [Reference(typeof(ProjectTechCapabilityModel))]
+        public List<ProjectTechCapabilityModel> TechStacks { get; set; } = new();
     }
 }
