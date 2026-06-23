@@ -1,0 +1,50 @@
+﻿.section-subtitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+/* Customização das Pills para combinar com os Social Links */
+.custom-pill {
+    transition: all 0.3s ease !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+    .custom-pill.active {
+        background-color: #1b6ec2 !important; /* Seu azul de destaque */
+        transform: scale(1.03);
+        box-shadow: 0px 5px 15px rgba(0, 113, 193, 0.4);
+    }
+
+    .custom-pill:hover:not(.active) {
+        background-color: rgba(255,255,255,0.05) !important;
+        transform: translateX(5px);
+    }
+
+/* Links de Highlights com efeito Hover dos botões sociais */
+.highlight-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 20px;
+    background-color: #f8f9fa;
+    color: #000;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid #dee2e6;
+}
+
+    .highlight-link:hover {
+        background-color: #000;
+        color: #fff;
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0px 5px 15px rgba(0, 55, 110, 0.3);
+    }
+
+.personal-insight {
+    border-radius: 4px;
+}
