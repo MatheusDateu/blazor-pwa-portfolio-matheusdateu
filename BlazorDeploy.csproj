@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -24,10 +24,6 @@
     <PackageReference Include="SimulationTree.BinPacker" Version="0.3.9" />
     <PackageReference Include="Supabase" Version="1.1.1" />
     <PackageReference Include="System.Text.Json" Version="10.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
   </ItemGroup>
 
   <ItemGroup>
