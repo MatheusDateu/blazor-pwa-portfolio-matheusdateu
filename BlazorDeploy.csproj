@@ -24,7 +24,7 @@
     <PackageReference Include="SimulationTree.BinPacker" Version="0.3.9" />
     <PackageReference Include="Supabase" Version="1.1.1" />
     <PackageReference Include="System.Text.Json" Version="10.0.1" />
-  </ItemGroup>re:
+  </ItemGroup>
 
   <ItemGroup>
     <None Include=".github\copilot-instructions.md" />
