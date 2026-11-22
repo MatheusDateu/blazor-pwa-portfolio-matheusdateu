@@ -7,7 +7,7 @@
 
 ## 📜 Description
 
-Welcome to **MatheusDateu's portfolio**, a sophisticated Blazor WASM application developed with .NET 8. This portfolio showcases my professional journey and technical skills through various sections including About Me, Technologies, Experiences, and Projects. Additionally, it features several useful tools and entertaining games to provide a comprehensive view of my capabilities and interests.
+Welcome to **MatheusDateu's portfolio**, a sophisticated Blazor WASM application developed with .NET 10. This portfolio showcases my professional journey and technical skills through various sections including About Me, Technologies, Experiences, and Projects. Additionally, it features several useful tools and entertaining games to provide a comprehensive view of my capabilities and interests.
 
 ## 🎨 Features
 

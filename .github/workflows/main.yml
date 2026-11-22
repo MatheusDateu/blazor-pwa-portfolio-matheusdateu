@@ -45,7 +45,7 @@ jobs:
 
       - name: Fix href base in index.html
         run: |
-          sed -i 's|<base href="[^"]*" />|<base href="https://matheusdateu.github.io/blazor-pwa-portfolio-matheusdateu/" />|' docs/wwwroot/index.html
+          sed -i 's|<base href="[^"]*" />|<base href="/" />|' docs/wwwroot/index.html
       
       - name: Setup Pages
         uses: actions/configure-pages@v4

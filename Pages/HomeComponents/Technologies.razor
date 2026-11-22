@@ -1,8 +1,10 @@
-﻿@using BlazorDeploy.Models
+﻿@using System.Globalization
+@using System.Text
+@using BlazorDeploy.Models
 @using BlazorDeploy.Services
+@using Microsoft.Extensions.Localization
 @inject IPortfolioService PortfolioService
 @inject NavigationManager NavManager
-@using Microsoft.Extensions.Localization
 @inject IStringLocalizer<BlazorDeploy.Resources.App> Loc
 
 <section id="tecnologias" class="section">
@@ -23,32 +25,50 @@
                 <circle cx="50%" cy="50%" r="40%"></circle>
             </div>
         }
+        else if (!Categories.Any())
+        {
+            <div class="text-center text-muted py-4">
+                <p class="m-0">@Loc["Lbl_FilteredProjectNotFound"]</p>
+            </div>
+        }
         else
         {
+            var firstCategoryId = Categories.First().Id;
+
             <div class="accordion custom-accordion" id="techAccordion">
                 @foreach (var category in Categories)
                 {
+                    var isFirstCategory = category.Id == firstCategoryId;
+                    var activeTechnologies = (category.Technologies ?? Enumerable.Empty<TechnologyModel>())
+                        .Where(t => t.IsActive)
+                        .OrderBy(t => t.DisplayOrder)
+                        .ToList();
+
                     <div class="accordion-item mb-3 shadow-sm rounded overflow-hidden">
                         <h2 class="accordion-header" id="@($"heading-{category.Id}")">
-                            <button class="accordion-button @(category.Id == Categories.First().Id ? "" : "collapsed")"
+                            <button class="accordion-button @(isFirstCategory ? "" : "collapsed")"
                                     type="button"
                                     data-bs-toggle="collapse"
                                     data-bs-target="@($"#collapse-{category.Id}")"
-                                    aria-expanded="@(category.Id == Categories.First().Id ? "true" : "false")"
+                                    aria-expanded="@(isFirstCategory ? "true" : "false")"
                                     aria-controls="@($"collapse-{category.Id}")">
                                 <i class="@category.IconClass me-3 fa-lg"></i>
                                 @category.Name
                             </button>
                         </h2>
                         <div id="@($"collapse-{category.Id}")"
-                             class="accordion-collapse collapse @(category.Id == Categories.First().Id ? "show" : "")"
+                             class="accordion-collapse collapse @(isFirstCategory ? "show" : "")"
                              aria-labelledby="@($"heading-{category.Id}")"
                              data-bs-parent="#techAccordion">
 
                             <div class="accordion-body bg-white">
                                 <div class="row g-4 justify-content-center">
-                                    @foreach (var tech in category.Technologies.Where(t => t.IsActive).OrderBy(t => t.DisplayOrder))
+                                    @foreach (var tech in activeTechnologies)
                                     {
+                                        var activeCapabilities = (tech.Capabilities ?? Enumerable.Empty<TechCapabilityModel>())
+                                            .Where(c => c.IsActive)
+                                            .ToList();
+
                                         <div class="col-12 col-md-6 col-lg-4">
                                             <div class="tech-item-card h-100 d-flex flex-column">
                                                 <div class="d-flex align-items-center mb-3">
@@ -56,7 +76,7 @@
                                                 </div>
 
                                                 <div class="mb-3 flex-grow-1">
-                                                    @foreach (var cap in tech.Capabilities.Where(c => c.IsActive))
+                                                    @foreach (var cap in activeCapabilities)
                                                     {
                                                         <span class="badge badge-tech me-1 mb-1 rounded-pill">
                                                             @cap.Description
@@ -64,10 +84,13 @@
                                                     }
                                                 </div>
 
-                                                <button class="btn btn-outline-custom btn-sm w-100 mt-auto rounded-pill"
-                                                        @onclick="() => FilterProjects(tech.SearchSlug)">
-                                                    @Loc["Lbl_SeeMore"]
-                                                </button>
+                                                @if (HasMatchingProjectFilter(tech.SearchSlug))
+                                                {
+                                                    <button class="btn btn-outline-custom btn-sm w-100 mt-auto rounded-pill"
+                                                            @onclick="() => FilterProjects(tech.SearchSlug)">
+                                                        @Loc["Lbl_SeeMore"]
+                                                    </button>
+                                                }
                                             </div>
                                         </div>
                                     }
@@ -82,15 +105,299 @@
 </section>
 
 @code {
-    private HashSet<TechCategoryModel> Categories { get; set; }
+    #region Constants and Mappings
 
+    private static readonly Dictionary<string, string[]> TagAliases = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["dotnet-desktop"] = [".net", ".net framework", ".net core", "dotnet", "c#", "csharp", "desktop", "wpf", "windows forms", "maui"],
+        ["dotnet-backend"] = [".net", ".net framework", ".net core", "dotnet", "c#", "csharp", "backend", "asp.net", "asp.net core", "minimal apis", "ef core", "entity framework", "dapper", "docker"],
+        ["dotnet-mobile"] = [".net", ".net core", "dotnet", "c#", "csharp", "maui", "blazor", "hybrid", "multiplataforma"],
+        ["dotnet-frontend"] = [".net", ".net core", "dotnet", "c#", "csharp", "frontend", "blazor", "blazor wasm", "blazor server", "blazor app", "asp.net mvc", "mudblazor"],
+        ["dotnet-rpa"] = [".net", ".net framework", ".net core", "dotnet", "c#", "csharp", "rpa", "automacao", "automacao de tarefas", "uipath", "selenium", "ef core", "dapper", "windows forms"],
+        ["ts-frontend"] = ["typescript", "ts", "javascript", "frontend", "angular", "react", "nginx"],
+        ["python-frontend"] = ["python", "frontend", "django", "flask"],
+        ["python-backend-ai"] = ["python", "backend", "flask", "django", "ai", "ia", "inteligencia artificial", "rag", "llm", "chatbot", "chromadb", "pgvector", "mcp"],
+        ["java-desktop"] = ["java", "desktop", "swing", "easyfood"],
+        ["java-backend"] = ["java", "backend", "spring", "springboot", "hibernate"],
+        ["java-android"] = ["java", "android"],
+        ["kotlin-android"] = ["kotlin", "android", "supabase"],
+        ["flutter"] = ["flutter", "dart"],
+        ["db-sql"] = ["sql", "relacional", "banco de dados", "bancos de dados", "database", "postgresql", "postgres", "mysql", "sql server", "sqlite", "pgvector"],
+        ["db-nosql"] = ["nosql", "cache", "banco de dados", "bancos de dados", "database", "redis", "chromadb", "firebase"]
+    };
+
+    #endregion Constants and Mappings
+
+    #region Fields and Properties
+
+    private HashSet<TechCategoryModel>? Categories { get; set; }
+    private HashSet<ProjectCategoryModel>? ProjectCategories { get; set; }
+    private HashSet<PortfolioProjectModel>? Projects { get; set; }
+    private readonly HashSet<string> _validSlugs = new(StringComparer.OrdinalIgnoreCase);
+
+    #endregion Fields and Properties
+
+    #region Lifecycle Methods
+
+    /// <summary>
+    /// Initialises the component by fetching technology categories, project categories, and projects concurrently,
+    /// then pre-computing which search slugs resolve to at least one project.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
-        Categories = await PortfolioService.GetTechStackAsync();
+        Task<HashSet<TechCategoryModel>> techTask = PortfolioService.GetTechStackAsync();
+        Task<HashSet<ProjectCategoryModel>> categoriesTask = PortfolioService.GetCategoriesAsync();
+        Task<HashSet<PortfolioProjectModel>> projectsTask = PortfolioService.GetProjectsAsync();
+
+        await Task.WhenAll(techTask, categoriesTask, projectsTask);
+
+        Categories = techTask.Result ?? new HashSet<TechCategoryModel>();
+        ProjectCategories = categoriesTask.Result ?? new HashSet<ProjectCategoryModel>();
+        Projects = projectsTask.Result ?? new HashSet<PortfolioProjectModel>();
+
+        PrecomputeValidSlugs();
     }
 
-    private void FilterProjects(string tag)
+    #endregion Lifecycle Methods
+
+    #region Filter Matching and Navigation
+
+    /// <summary>
+    /// Pre-computes active technology slugs that resolve to at least one project via category match or generic fallback.
+    /// </summary>
+    private void PrecomputeValidSlugs()
     {
-        NavManager.NavigateTo($"/projetos?tag={tag}");
+        _validSlugs.Clear();
+
+        if (Categories == null || Categories.Count == 0 || Projects == null || Projects.Count == 0)
+        {
+            return;
+        }
+
+        HashSet<int> validCategoryIds = (ProjectCategories ?? Enumerable.Empty<ProjectCategoryModel>())
+            .Select(category => category.Id)
+            .ToHashSet();
+
+        List<PortfolioProjectModel> visibleProjects = Projects
+            .Where(project =>
+                project.ProjectCategories != null &&
+                project.ProjectCategories.Any(pc => validCategoryIds.Contains(pc.CategoryId)))
+            .ToList();
+
+        if (visibleProjects.Count == 0)
+        {
+            return;
+        }
+
+        IEnumerable<string> distinctSlugs = Categories
+            .Where(category => category.Technologies != null)
+            .SelectMany(category => category.Technologies)
+            .Where(tech => tech.IsActive && !string.IsNullOrWhiteSpace(tech.SearchSlug))
+            .Select(tech => tech.SearchSlug.Trim())
+            .Distinct(StringComparer.OrdinalIgnoreCase);
+
+        foreach (string slug in distinctSlugs)
+        {
+            if (CanSlugResolveProjects(slug, ProjectCategories, visibleProjects))
+            {
+                _validSlugs.Add(slug);
+            }
+        }
     }
+
+    /// <summary>
+    /// Determines whether a technology slug resolves to at least one project on the Projects section.
+    /// </summary>
+    /// <param name="slug">The search slug to evaluate.</param>
+    /// <param name="categories">Available project categories.</param>
+    /// <param name="visibleProjects">Projects belonging to valid categories.</param>
+    /// <returns><c>true</c> if at least one project matches; otherwise, <c>false</c>.</returns>
+    private static bool CanSlugResolveProjects(
+        string slug,
+        IEnumerable<ProjectCategoryModel>? categories,
+        List<PortfolioProjectModel> visibleProjects)
+    {
+        HashSet<string> terms = ExpandSearchTerms(slug);
+        if (terms.Count == 0)
+        {
+            return false;
+        }
+
+        ProjectCategoryModel? matchedCategory = categories?.FirstOrDefault(category =>
+            !string.IsNullOrWhiteSpace(category.Name) &&
+            ContainsAnyTerm(category.Name, terms));
+
+        if (matchedCategory != null)
+        {
+            return visibleProjects.Any(project =>
+                project.ProjectCategories != null &&
+                project.ProjectCategories.Any(pc => pc.CategoryId == matchedCategory.Id));
+        }
+
+        return visibleProjects.Any(project => MatchesGenericSearch(project, terms));
+    }
+
+    /// <summary>
+    /// Determines whether the specified tag slug has a compatible filter in the Projects section.
+    /// </summary>
+    /// <param name="tagSlug">The search slug associated with a technology.</param>
+    /// <returns><c>true</c> if a compatible project filter exists; otherwise, <c>false</c>.</returns>
+    private bool HasMatchingProjectFilter(string? tagSlug)
+    {
+        if (string.IsNullOrWhiteSpace(tagSlug))
+        {
+            return false;
+        }
+
+        return _validSlugs.Contains(tagSlug.Trim());
+    }
+
+    /// <summary>
+    /// Expands a tag or query into normalised search terms including configured aliases and separator variants.
+    /// </summary>
+    /// <param name="input">The raw tag or query string.</param>
+    /// <returns>A set of accent-stripped search terms.</returns>
+    private static HashSet<string> ExpandSearchTerms(string input)
+    {
+        HashSet<string> terms = new(StringComparer.OrdinalIgnoreCase);
+        string trimmed = input.Trim();
+
+        if (string.IsNullOrWhiteSpace(trimmed))
+        {
+            return terms;
+        }
+
+        AddNormalisedVariant(terms, trimmed);
+
+        if (TagAliases.TryGetValue(trimmed, out string[]? aliases))
+        {
+            foreach (string alias in aliases)
+            {
+                AddNormalisedVariant(terms, alias);
+            }
+        }
+
+        return terms;
+    }
+
+    /// <summary>
+    /// Adds both the diacritic-free term and its space-separated variant to the term set.
+    /// </summary>
+    /// <param name="terms">The target collection of search terms.</param>
+    /// <param name="rawTerm">The term to normalise and add.</param>
+    private static void AddNormalisedVariant(HashSet<string> terms, string rawTerm)
+    {
+        string normalised = RemoveDiacritics(rawTerm.Trim());
+        if (!string.IsNullOrWhiteSpace(normalised))
+        {
+            terms.Add(normalised);
+            string spaced = normalised.Replace('-', ' ').Replace('_', ' ').Trim();
+            if (!string.IsNullOrWhiteSpace(spaced))
+            {
+                terms.Add(spaced);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Evaluates whether a project matches any expanded search term across its fields, categories, and technology stack.
+    /// </summary>
+    /// <param name="project">The project model to check.</param>
+    /// <param name="terms">The set of normalised search terms.</param>
+    /// <returns><c>true</c> if any project attribute matches; otherwise, <c>false</c>.</returns>
+    private static bool MatchesGenericSearch(PortfolioProjectModel project, HashSet<string> terms)
+    {
+        bool matchesBasicFields =
+            ContainsAnyTerm(project.Name, terms) ||
+            ContainsAnyTerm(project.Synopsis, terms) ||
+            ContainsAnyTerm(project.Description, terms);
+
+        if (matchesBasicFields)
+        {
+            return true;
+        }
+
+        bool matchesTechStack = project.TechStacks != null &&
+            project.TechStacks.Any(ts =>
+                ts.Capability != null &&
+                ContainsAnyTerm(ts.Capability.Description, terms));
+
+        if (matchesTechStack)
+        {
+            return true;
+        }
+
+        bool matchesCategories = project.ProjectCategories != null &&
+            project.ProjectCategories.Any(pc =>
+                pc.Category != null &&
+                ContainsAnyTerm(pc.Category.Name, terms));
+
+        return matchesCategories;
+    }
+
+    /// <summary>
+    /// Checks whether a candidate string contains at least one normalised search term using case-insensitive comparison.
+    /// </summary>
+    /// <param name="source">The source text to inspect.</param>
+    /// <param name="terms">The set of normalised search terms.</param>
+    /// <returns><c>true</c> if any term is contained within the normalised source; otherwise, <c>false</c>.</returns>
+    private static bool ContainsAnyTerm(string? source, HashSet<string> terms)
+    {
+        if (string.IsNullOrWhiteSpace(source))
+        {
+            return false;
+        }
+
+        string normalisedSource = RemoveDiacritics(source);
+
+        foreach (string term in terms)
+        {
+            if (normalisedSource.Contains(term, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Strips diacritical marks from a string for accent-insensitive comparisons.
+    /// </summary>
+    /// <param name="text">The input string.</param>
+    /// <returns>The text without accent marks.</returns>
+    private static string RemoveDiacritics(string text)
+    {
+        string decomposed = text.Normalize(NormalizationForm.FormD);
+        StringBuilder builder = new(decomposed.Length);
+
+        foreach (char character in decomposed)
+        {
+            UnicodeCategory category = CharUnicodeInfo.GetUnicodeCategory(character);
+            if (category != UnicodeCategory.NonSpacingMark)
+            {
+                builder.Append(character);
+            }
+        }
+
+        return builder.ToString().Normalize(NormalizationForm.FormC);
+    }
+
+    /// <summary>
+    /// Navigates to the projects page filtered by the selected technology tag.
+    /// </summary>
+    /// <param name="tag">The technology slug used as query parameter.</param>
+    private void FilterProjects(string? tag)
+    {
+        if (string.IsNullOrWhiteSpace(tag))
+        {
+            return;
+        }
+
+        string encodedTag = Uri.EscapeDataString(tag.Trim());
+        NavManager.NavigateTo($"/projetos?tag={encodedTag}");
+    }
+
+    #endregion Filter Matching and Navigation
+
 }
